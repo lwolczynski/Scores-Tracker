@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+    <head>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Krona+One">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans">
+    <link rel="stylesheet" href={% static 'styles.css' %}>
+    {% block head %}{% endblock %}
+	<title>{% block title %}{% endblock %}</title>
+    </head>
+    <body>
+        <div id="topbar" class="container">
+            <nav class="main container">
+                <div id="logo">MyScores</div>
+                {% if user.authenticated %}
+                <div class="item push"><a href="#">New game</a></div>
+                <div class="item"><a href="#">History</a>/div>
+                <div class="item"><a href="#">My account</a></div>
+                <div class="item"><a href="#">Logout</a></div>
+                {% else %}
+                <div class="item push"><a href="#">Login</a></div>
+                <div class="item"><a href="#">Register</a></div>
+                {% endif %}
+            </nav>
+        </div>
+    {% block content %}{% endblock %}
+    </body>
+</html>

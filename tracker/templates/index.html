@@ -1,0 +1,54 @@
+{% extends 'layout.html' %}
+{% load static %}
+
+{% block head %}<link rel="stylesheet" href={% static 'landing.css' %}>{% endblock %}
+
+{% block title %}Welcome!{% endblock %}
+
+{% block content %}
+<div id="content" class="main containter">
+    <div id="landing-top" class="containter">
+        <div id="image-div">
+            <img src={% static 'card.jpg' %} class="landing-image">
+            <div class="typewriter">
+                <h1 class="first">Your personal (disc) golf diary</h1><h1 class="second">Never lose a score again!</h1>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="row-item">
+            <div class="row-item-title">
+                <h4 class="row-item-title-span">Play</h4>
+            </div>
+            <div class="row-item-media">
+                <img src={% static 'golf-club.svg' %}  class="media-image">
+            </div>
+            <div class="row-item-description">
+                Pick from different games and variants! You pick between golf and disc golf, you choose 9-hole or 18-hole game, you decide to track par or not!
+            </div>
+        </div>
+        <div class="row-item">
+            <div class="row-item-title">
+                <h4 class="row-item-title-span">Track</h4>
+            </div>
+            <div class="row-item-media">
+                <img src={% static 'diary.svg' %} class="media-image">
+            </div>
+            <div class="row-item-description">
+                No matter if you play by yourself or with a bunch of friends who watch everything you do! Track score of unlimited number of players!
+            </div>
+        </div>
+        <div class="row-item">
+            <div class="row-item-title">
+                <h4 class="row-item-title-span">Share</h4>
+            </div>
+            <div class="row-item-media">
+                <img src={% static 'message.svg' %} class="media-image">
+            </div>
+            <div class="row-item-description">
+                Want to share the results after you're done playing? Nothing easier! Copy a link and text it to the group you played with! Let them see how they did!
+            </div>                
+        </div>
+    </div>
+</div>
+{% endblock %}
