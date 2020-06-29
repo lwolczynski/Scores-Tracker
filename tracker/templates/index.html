@@ -1,7 +1,7 @@
 {% extends 'layout.html' %}
 {% load static %}
 
-{% block head %}<link rel="stylesheet" href={% static 'landing.css' %}>{% endblock %}
+{% block head %}<link rel="stylesheet" href={% static 'index.css' %}>{% endblock %}
 
 {% block title %}Welcome!{% endblock %}
 
@@ -10,8 +10,8 @@
     <div id="landing-top" class="containter">
         <div id="image-div">
             <img src={% static 'card.jpg' %} class="landing-image">
-            <div class="typewriter">
-                <h1 class="first">Your personal (disc) golf diary</h1><h1 class="second">Never lose a score again!</h1>
+            <div class="containter">
+                <h1 id="type-first" class="typewriter">Your personal (disc) golf diary</h1><h1 id="type-second" class="typewriter">Never lose a score again!</h1>
             </div>
         </div>
     </div>
@@ -24,7 +24,7 @@
                 <img src={% static 'golf-club.svg' %}  class="media-image">
             </div>
             <div class="row-item-description">
-                Pick from different games and variants! You pick between golf and disc golf, you choose 9-hole or 18-hole game, you decide to track par or not!
+                <span>Pick from different games and variants! You pick between golf and disc golf, you choose 9-hole or 18-hole game, you decide to track par or not!</span>
             </div>
         </div>
         <div class="row-item">
@@ -35,7 +35,7 @@
                 <img src={% static 'diary.svg' %} class="media-image">
             </div>
             <div class="row-item-description">
-                No matter if you play by yourself or with a bunch of friends who watch everything you do! Track score of unlimited number of players!
+                <span>No matter if you play by yourself or with a bunch of friends who watch everything you do! Track score of unlimited number of players!</span>
             </div>
         </div>
         <div class="row-item">
@@ -46,7 +46,7 @@
                 <img src={% static 'message.svg' %} class="media-image">
             </div>
             <div class="row-item-description">
-                Want to share the results after you're done playing? Nothing easier! Copy a link and text it to the group you played with! Let them see how they did!
+                <span>Want to share the results after you're done playing? Nothing easier! Copy a link and text it to the group you played with! Let them see how they did!</span>
             </div>                
         </div>
     </div>

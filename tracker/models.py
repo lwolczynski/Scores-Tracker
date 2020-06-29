@@ -1,5 +1,8 @@
 from django.db import models
-from django.contrib.auth.models import User
+from django.contrib.auth.models import AbstractUser
+
+class CustomUser(AbstractUser):
+    email = models.EmailField(unique=True)
 
 class Sport(models.Model):
     name = models.CharField(max_length=30)
@@ -8,7 +11,7 @@ class HolesNumber(models.Model):
     number = models.SmallIntegerField()
 
 class Game(models.Model):
-    owner = models.ForeignKey(User, on_delete = models.PROTECT)
+    owner = models.ForeignKey(CustomUser, on_delete = models.PROTECT)
     time_created = models.DateTimeField(auto_now_add=True)
     sport = models.ForeignKey(Sport, on_delete = models.PROTECT)
     holes = models.ForeignKey(HolesNumber, on_delete = models.PROTECT)

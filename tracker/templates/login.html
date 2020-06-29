@@ -1,0 +1,28 @@
+{% extends 'layout.html' %}
+{% load static %}
+
+{% block head %}<link rel="stylesheet" href={% static 'reg_login.css' %}>{% endblock %}
+
+{% block title %}Login{% endblock %}
+
+{% block content %}
+    <div id="content" class="main containter">
+        <div id="form-div" class="containter">
+            <h4 class="row-item-title-span">Login</h4>
+            <form method="POST">
+                {% csrf_token %}
+                {% for field in form %}
+                <p>
+                    {{ field.label_tag }}<br>
+                    {{ field }}<br>
+                </p>
+                {% endfor %}
+                <p id="footer">
+                    <button type="submit">Login</button>
+                    <!-- <small>Don't have an account? <a href={% url 'register' %}>Register here</a>!</small> -->
+                    <small><a href={% url 'index' %}>Forgot password?</a></small>
+                </p>
+            </form>
+        </div>
+    </div>
+{% endblock %}
