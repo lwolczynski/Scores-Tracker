@@ -1,0 +1,24 @@
+{% extends 'layout.html' %}
+{% load static %}
+
+{% block head %}
+<link rel="stylesheet" href={% static 'form_page.css' %}>
+<script src="{% static 'new_game.js' %}"></script>
+{% endblock %}
+
+{% block title %}New game{% endblock %}
+
+{% block content %}
+    <div id="content" class="main containter">
+        <div id="form-div" class="containter">
+            <h4 class="row-item-title-span">New game</h4>
+            <form method="POST">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <p id="footer">
+                    <button type="submit">Start</button>
+                </p>
+            </form>
+        </div>
+    </div>
+{% endblock %}

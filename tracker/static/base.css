@@ -1,12 +1,12 @@
 html, body {
     margin: 0px;
-    font-family: Open Sans;
-    height: 100%;
+    font-family: "Open Sans";
 }
 
 body {
     display: flex;
     flex-direction: column;
+    min-height: 100vh;
 }
 
 nav {
@@ -36,7 +36,7 @@ nav a {
 }
 
 #logo {
-    font-family: Krona One;
+    font-family: "Krona One";
     font-size: 1.5em;
 }
 
@@ -81,6 +81,10 @@ nav a {
     }
 }
 
+.hidden {
+    display: none !important;
+}
+
 .message {
     display: flex;
     padding: 0px;
@@ -108,6 +112,13 @@ nav a {
     margin-bottom: 20px;
 }
 
+#sticky-top {
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
 a {
     color: inherit;
 }
@@ -126,10 +137,15 @@ footer {
     flex-shrink: 0;
 }
 
-.center {
+.span-footer {
     width: inherit;
     text-align: center;
     padding: 10px;
+}
+
+.center {
+    width: 100%;
+    text-align: center;
 }
 
 .alert-success {
@@ -142,6 +158,12 @@ footer {
     color: #856404;
     background-color: #fff3cd;
     border-color: #ffeeba;
+}
+
+.alert-danger {
+    color: #721c24;
+    background-color: #f8d7da;
+    border-color: #f5c6cb;
 }
 
 .close:hover {
@@ -157,4 +179,22 @@ footer {
     opacity: 0.5;
     cursor: pointer;
     color: inherit;
+}
+
+.float-right {
+    float: right;
+    margin-left: auto !important;
+}
+
+.spacing {
+    margin-block-start: 10px;
+    margin-block-end: 10px;
+}
+
+.flex {
+    display: flex;
+}
+
+.green {
+    color: #96ceb4;
 }

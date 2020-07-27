@@ -7,43 +7,48 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Krona+One">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans">
     <link rel="stylesheet" href={% static 'base.css' %}>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="{% static 'main.js' %}"></script>
     {% block head %}{% endblock %}
 	<title>{% block title %}{% endblock %}</title>
     </head>
     <body>
-        <div id="topbar" class="container">
-            <nav class="main container">
-                <div id="logo"><a href="{% url 'index' %}">MyScores</a></div>
-                {% if user.is_authenticated %}
-                <div class="nav-item hidden-on-mobile push"><a href="#">New game</a></div>
-                <div class="nav-item hidden-on-mobile"><a href="#">History</a></div>
-                <div class="nav-item hidden-on-mobile"><a href="#">My account</a></div>
-                <div class="nav-item hidden-on-mobile"><a href="{% url 'logout' %}">Logout</a></div>
-                {% else %}
-                <div class="nav-item hidden-on-mobile push"><a href="{% url 'login' %}">Login</a></div>
-                <div class="nav-item hidden-on-mobile"><a href="{% url 'register' %}">Register</a></div>
-                {% endif %}
-            </nav>
-            <div id="burger" class="container"><button><i class="fa fa-bars"></i></button></div>
-        </div>
-        {% if messages %}
-            {% for message in messages %}
-            <div class="container alert alert-{{ message.tags }}">
-                <div class="main container message">
-                    <div>
-                        {{ message }}
-                    </div>
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                        <span aria-hidden="true">×</span>
-                    </button>
-                </div>
+        <div id="sticky-top" class="container">
+            <div id="topbar" class="container">
+                <nav class="main container">
+                    <div id="logo"><a href="{% url 'index' %}">MyScores</a></div>
+                    {% if user.is_authenticated %}
+                    <div class="nav-item hidden-on-mobile push"><a href="{% url 'new_game' %}">New game</a></div>
+                    <div class="nav-item hidden-on-mobile"><a href="#">History</a></div>
+                    <div class="nav-item hidden-on-mobile"><a href="#">My account</a></div>
+                    <div class="nav-item hidden-on-mobile"><a href="{% url 'logout' %}">Logout</a></div>
+                    {% else %}
+                    <div class="nav-item hidden-on-mobile push"><a href="{% url 'login' %}">Login</a></div>
+                    <div class="nav-item hidden-on-mobile"><a href="{% url 'register' %}">Register</a></div>
+                    {% endif %}
+                </nav>
+                <div id="burger" class="container"><button><i class="fa fa-bars"></i></button></div>
             </div>
-            {% endfor %}
-        {% endif %}       
+            <div id="messages" class="container">
+            {% if messages %}
+                {% for message in messages %}
+                <div class="container alert alert-{{ message.tags }}">
+                    <div class="main container message">
+                        <div>
+                            {{ message }}
+                        </div>
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">×</span>
+                        </button>
+                    </div>
+                </div>
+                {% endfor %}
+            {% endif %}
+            </div>
+        </div>    
         {% block content %}{% endblock %}
         <footer>
-            <small class="center">© 2020</small>
+            <small class="span-footer">© 2020</small>
         </footer>
     </body>
 </html>

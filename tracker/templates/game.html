@@ -1,0 +1,36 @@
+{% extends 'layout.html' %}
+{% load static %}
+
+{% block head %}
+<link rel="stylesheet" href={% static 'game.css' %}>
+<script>
+    const holesNumber = {{ game.holes }};
+    const editable = {{ edit|lower }};
+</script>
+<script src="{% static 'game.js' %}"></script>
+{% endblock %}
+
+{% block title %}Game{% endblock %}
+
+{% block content %}
+<div id="content" class="main containter">
+    <div class="containter">
+        <div class="flex-gap spacing">
+            <div>Game #{{game.id}} (sport: {{game.sport}}) played at {{game.time_created}}</div>
+            <div class="float-right flex">
+                <button id="btn-change-view" class="btn-pill">Change view</button>
+            </div>
+        </div>
+        <div class="spacing">
+            <span id="table-spinner" class="table-spinner fa fa-spinner fa-pulse fa-2x fa-fw center"></span>
+            <table class="hidden">
+                <thead></thead>
+                <tbody></tbody>
+            </table>
+        </div>
+        <div class="spacing">
+            Notes:<br>{{game.notes|default:"(none)"}}
+        </div>
+    </div>
+</div>
+{% endblock %}
