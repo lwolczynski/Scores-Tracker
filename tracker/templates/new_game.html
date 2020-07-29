@@ -3,7 +3,6 @@
 
 {% block head %}
 <link rel="stylesheet" href={% static 'form_page.css' %}>
-<script src="{% static 'new_game.js' %}"></script>
 {% endblock %}
 
 {% block title %}New game{% endblock %}
@@ -21,4 +20,8 @@
             </form>
         </div>
     </div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{% static 'new_game.js' %}"></script>
 {% endblock %}

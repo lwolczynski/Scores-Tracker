@@ -3,12 +3,11 @@
 <html>
     <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" type="image/png" href="{% static 'favico.png' %}" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Krona+One">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans">
     <link rel="stylesheet" href={% static 'base.css' %}>
-    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-    <script src="{% static 'main.js' %}"></script>
     {% block head %}{% endblock %}
 	<title>{% block title %}{% endblock %}</title>
     </head>
@@ -19,7 +18,7 @@
                     <div id="logo"><a href="{% url 'index' %}">MyScores</a></div>
                     {% if user.is_authenticated %}
                     <div class="nav-item hidden-on-mobile push"><a href="{% url 'new_game' %}">New game</a></div>
-                    <div class="nav-item hidden-on-mobile"><a href="#">History</a></div>
+                    <div class="nav-item hidden-on-mobile"><a href="{% url 'history' %}">History</a></div>
                     <div class="nav-item hidden-on-mobile"><a href="#">My account</a></div>
                     <div class="nav-item hidden-on-mobile"><a href="{% url 'logout' %}">Logout</a></div>
                     {% else %}
@@ -48,7 +47,21 @@
         </div>    
         {% block content %}{% endblock %}
         <footer>
-            <small class="span-footer">© 2020</small>
+            <small class="span-footer">
+                © 2020 created by <a href="https://github.com/lwolczynski">lwolczynski</a> <span id="show-credits">(show credits)</span>
+            </small>
+            <small class="span-footer hidden zero-opacity">
+                Icons made by <a href="https://www.flaticon.com/authors/prettycons">prettycons</a> from <a href="https://www.flaticon.com/">www.flaticon.com</a>
+            </small>
+            <small class="span-footer hidden zero-opacity">
+                Favico made by <a href="https://www.flaticon.com/authors/freepik">Freepik</a> from <a href="https://www.flaticon.com/">www.flaticon.com</a>
+            </small>
+            <small class="span-footer hidden zero-opacity">
+                Golf scorecard made by <a href="https://www.flickr.com/photos/golf_pictures/">Dan Perry</a> from <a href="https://www.flickr.com/">www.flickr.com</a>
+            </small>
         </footer>
+        <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+        <script src="{% static 'main.js' %}"></script>
+        {% block scripts %}{% endblock %}
     </body>
 </html>

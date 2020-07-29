@@ -1,8 +1,3 @@
-document.addEventListener('DOMContentLoaded', () => {
-    modifyFormView();
-    lookForErrorMsgs();
-})
-
 function modifyFormView() {
     formPs = document.querySelector("form").querySelectorAll("p");
     formPs.forEach(p => {
@@ -28,3 +23,8 @@ function lookForErrorMsgs() {
         ul.remove();
     });
 }
+
+// Run at start
+
+modifyFormView();
+lookForErrorMsgs();

@@ -60,6 +60,7 @@ def logout_request(request):
     return redirect('index')
 
 #New game view
+@login_required
 def new_game(request):
     if request.method == 'POST':
         form = NewGameForm(request.POST)
@@ -83,6 +84,11 @@ def new_game(request):
     return render(request, 'new_game.html', {'form': form})
 
 #Game view
+def history(request):
+    games = Game.objects.filter(owner=request.user).order_by('-id')
+    return render(request, "history.html", {'games': [game.as_dict() for game in games]})
+
+#Game view
 def game(request, game_id, timestamp):
     date = datetime.utcfromtimestamp(timestamp).replace(tzinfo=timezone.utc).astimezone(tz=None)
     try:
@@ -94,6 +100,7 @@ def game(request, game_id, timestamp):
     return render(request, "game.html", {'edit': False, 'game': game.as_dict()})
 
 #Game edit view
+@login_required
 def game_edit(request, game_id, timestamp):
     date = datetime.utcfromtimestamp(timestamp).replace(tzinfo=timezone.utc).astimezone(tz=None)
     try:
@@ -128,6 +135,7 @@ def get_scores(request, game_id, timestamp):
     return JsonResponse({'status': 'ok', 'scores': [score.as_dict() for score in scores]})
 
 #Save scores view
+@login_required
 def save_scores(request, game_id, timestamp):
     date = datetime.utcfromtimestamp(timestamp).replace(tzinfo=timezone.utc).astimezone(tz=None)
     try:
@@ -158,6 +166,7 @@ def save_scores(request, game_id, timestamp):
     return JsonResponse({'status': 'ok', 'message': {'tag': 'success', 'text': 'Saved successfully.'}})
 
 #Add player view
+@login_required
 def add_player(request, game_id, timestamp):
     date = datetime.utcfromtimestamp(timestamp).replace(tzinfo=timezone.utc).astimezone(tz=None)
     try:

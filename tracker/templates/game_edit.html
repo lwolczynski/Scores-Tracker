@@ -3,11 +3,6 @@
 
 {% block head %}
 <link rel="stylesheet" href={% static 'game.css' %}>
-<script>
-    const holesNumber = {{ game.holes }};
-    const editable = {{ edit|lower }};
-</script>
-<script src="{% static 'game.js' %}"></script>
 {% endblock %}
 
 {% block title %}Game{% endblock %}
@@ -42,4 +37,12 @@
         </form>
     </div>
 </div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    const holesNumber = {{ game.holes }};
+    const editable = {{ edit|lower }};
+</script>
+<script src="{% static 'game.js' %}"></script>
 {% endblock %}

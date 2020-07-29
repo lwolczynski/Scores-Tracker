@@ -1,0 +1,18 @@
+{% extends 'layout.html' %}
+{% load static %}
+
+{% block head %}
+<link rel="stylesheet" href={% static 'game.css' %}>
+{% endblock %}
+
+{% block title %}History{% endblock %}
+
+{% block content %}
+<div id="content" class="main containter">
+    <div class="containter">
+        {% for game in games %}
+            <div>{{ game }}<i class="fa fa-eye" aria-hidden="true"></i><i class="fa fa-pencil-square-o" aria-hidden="true"></i><i class="fa fa-trash-o" aria-hidden="true"></i></div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

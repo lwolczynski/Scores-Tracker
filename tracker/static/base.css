@@ -141,11 +141,29 @@ footer {
     width: inherit;
     text-align: center;
     padding: 10px;
+    transition: opacity 2s;
+}
+
+.span-footer.zero-opacity {
+    opacity: 0;
+}
+
+#show-credits {
+    text-decoration-line: underline;
+    text-decoration-style: dotted;
+}
+
+#show-credits:hover {
+    cursor: pointer;
 }
 
 .center {
     width: 100%;
     text-align: center;
+}
+
+.alert {
+    transition: opacity 2s;
 }
 
 .alert-success {

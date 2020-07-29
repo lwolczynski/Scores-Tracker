@@ -7,6 +7,7 @@ urlpatterns = [
     path("login/", views.login_request, name="login"),
     path("logout/", views.logout_request, name="logout"),
     path("new_game/", views.new_game, name="new_game"),
+    path("history/", views.history, name="history"),
     path("game/<int:game_id>/<int:timestamp>/", views.game, name="game"),
     path("game/<int:game_id>/<int:timestamp>/edit", views.game_edit, name="game_edit"),
     path("game/<int:game_id>/<int:timestamp>/add_player", views.add_player, name="add_player"),

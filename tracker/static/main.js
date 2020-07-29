@@ -1,9 +1,3 @@
-document.addEventListener('DOMContentLoaded', () => {
-    installBurgerListener();
-    makeAlertsFadeOut();
-    installAlertDiscardListeners();
-})
-
 function installBurgerListener() {
     document.querySelector("#burger").addEventListener("click", function() {
         const navLinks = document.querySelectorAll(".nav-item");
@@ -17,7 +11,8 @@ function installBurgerListener() {
 function makeAlertsFadeOut() {
     alerts = document.querySelectorAll(".alert");
     alerts.forEach(alert => {
-        fadeOut(alert);
+        alert.addEventListener('transitionend', () => alert.remove());
+        setTimeout(() => alert.style.opacity = '0.2', 0);
     });
 }
 
@@ -54,20 +49,51 @@ function addMessage(msg) {
     btn.addEventListener("click", function() {
         this.closest("div").remove();
     });
-    fadeOut(outerDiv);
+    outerDiv.addEventListener('transitionend', () => outerDiv.remove());
+    setTimeout(() => outerDiv.style.opacity = '0.2', 0);
 }
 
-function fadeOut(element) {
-    var op = 1;  // initial opacity
-    var timer = setTimeout(function () {
-        setInterval(function () {
-            if (op <= 0.1){
-                clearInterval(timer);
-                element.remove();
+function fadeOutCredit(el) {
+    return new Promise(resolve => {
+        el.classList.add("zero-opacity");
+        const transitionEnded = e => {
+            el.removeEventListener('transitionend', transitionEnded);
+            el.classList.add("hidden");
+            resolve();
+        }
+        el.addEventListener('transitionend', transitionEnded);
+    })
+};
+
+function fadeInCredit(el) {
+    return new Promise(resolve => {
+        el.classList.remove("hidden");
+        setTimeout(() => el.classList.remove("zero-opacity"), 0);
+        const transitionEnded = e => {
+            el.removeEventListener('transitionend', transitionEnded);
+            resolve();
+        }
+        el.addEventListener('transitionend', transitionEnded);
+    })
+};
+
+function animateCredits() {
+    btn = document.querySelector("#show-credits");
+    btn.addEventListener("click", function() {
+        const spans = document.querySelectorAll(".span-footer");
+        (async function loop() {
+            for (let i = 0; i < spans.length; i++) {
+                if (i!=0) await fadeInCredit(spans[i]);
+                await fadeOutCredit(spans[i]);
             }
-            element.style.opacity = op;
-            element.style.filter = 'alpha(opacity=' + op * 100 + ")";
-            op -= op * 0.1;
-        }, 100);
-    }, 1000);
+            await fadeInCredit(spans[0]);
+        })();
+    });
 }
+
+// Run at start
+
+installBurgerListener();
+makeAlertsFadeOut();
+installAlertDiscardListeners();
+animateCredits();

@@ -43,6 +43,7 @@ class Game(models.Model):
             "sport": self.sport.name,
             "holes": self.holes.number,
             "time_created": self.time_created,
+            "timestamp": self.getTs(),
             "notes": self.notes,
 #            "scores": ["get_score/" + str(self.holes.number) +"/" + str(x) for x in list(scores)]
         } 

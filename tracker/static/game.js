@@ -1,18 +1,6 @@
 axios.defaults.xsrfCookieName = 'csrftoken'
 axios.defaults.xsrfHeaderName = "X-CSRFTOKEN"
 
-document.addEventListener('DOMContentLoaded', () => {
-    const scoreKeeper = makeScoreKeeper(holesNumber, editable);
-    scoreKeeper.addTableClass();
-    scoreKeeper.addButtonListeners();
-    scoreKeeper.createTopRow();
-    scoreKeeper.getScore().then(() => {
-        scoreKeeper.initiatePlayerRows();
-        scoreKeeper.showTable();
-    });
-    scoreKeeper.addSaveListener();
-})
-
 const makeScoreKeeper = (holesNumber, editable) => {
     return {
         holesNumber: holesNumber,
@@ -224,3 +212,15 @@ function setInputFilter(textbox, inputFilter) {
         });
     });
 }
+
+// Run at start
+
+const scoreKeeper = makeScoreKeeper(holesNumber, editable);
+scoreKeeper.addTableClass();
+scoreKeeper.addButtonListeners();
+scoreKeeper.createTopRow();
+scoreKeeper.getScore().then(() => {
+    scoreKeeper.initiatePlayerRows();
+    scoreKeeper.showTable();
+});
+scoreKeeper.addSaveListener();
