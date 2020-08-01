@@ -9,6 +9,13 @@ body {
     min-height: 100vh;
 }
 
+.container {
+    display: flex;
+    flex-flow: wrap;
+    align-content: space-between;
+    justify-content: space-between;
+}
+
 nav {
     display: flex;
     width: 100%;
@@ -153,10 +160,6 @@ footer {
     text-decoration-style: dotted;
 }
 
-#show-credits:hover {
-    cursor: pointer;
-}
-
 .center {
     width: 100%;
     text-align: center;
@@ -189,6 +192,10 @@ footer {
     text-decoration: none;
 }
 
+.clickable:hover, button:hover {
+    cursor: pointer;
+}
+
 .close {
     border: none;
     background-color: transparent;
@@ -215,4 +222,24 @@ footer {
 
 .green {
     color: #96ceb4;
+}
+
+.break {
+  width: 100%;
+  height: 0;
+}
+
+.btn-pill {
+    font-size: smaller;
+    border: 1px solid #d9d7ce;
+    border-radius: 10px;
+}
+
+.flex-gap > * {
+    margin: 5px 0 0 5px;
+}
+  
+.flex-gap {
+    display: flex;
+    margin: -5px 0 0 -5px;
 }

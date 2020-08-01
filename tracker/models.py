@@ -34,10 +34,6 @@ class Game(models.Model):
         return super(Game, self).save(*args, **kwargs)
 
     def as_dict(self):
-        # if self.holes.number == 9:
-        #     scores = Score9.objects.filter(game=self).values_list('id', flat=True)
-        # elif self.holes.number == 18:
-        #     scores = Score18.objects.filter(game=self).values_list('id', flat=True)
         return {
             "id": self.id,
             "sport": self.sport.name,
@@ -45,7 +41,20 @@ class Game(models.Model):
             "time_created": self.time_created,
             "timestamp": self.getTs(),
             "notes": self.notes,
-#            "scores": ["get_score/" + str(self.holes.number) +"/" + str(x) for x in list(scores)]
+        } 
+
+    def as_dict_with_players(self):
+        if self.holes.number == 9:
+            players = Score9.objects.filter(game=self).count()-1
+        elif self.holes.number == 18:
+            players = Score18.objects.filter(game=self).count()-1
+        return {
+            "id": self.id,
+            "sport": self.sport.name,
+            "holes": self.holes.number,
+            "players": players,
+            "time_created": self.time_created,
+            "timestamp": self.getTs(),
         } 
 
 class ScoreTable(models.Model):

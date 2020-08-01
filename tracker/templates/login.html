@@ -1,13 +1,13 @@
 {% extends 'layout.html' %}
 {% load static %}
 
-{% block head %}<link rel="stylesheet" href={% static 'form_page.css' %}>{% endblock %}
+{% block head %}<link rel="stylesheet" href={% static 'narrow_page.css' %}>{% endblock %}
 
 {% block title %}Login{% endblock %}
 
 {% block content %}
-    <div id="content" class="main containter">
-        <div id="form-div" class="containter">
+    <div id="content" class="main">
+        <div id="narrow-div">
             <h4 class="row-item-title-span">Login</h4>
             <form method="POST">
                 {% csrf_token %}
@@ -19,8 +19,7 @@
                 {% endfor %}
                 <p id="footer">
                     <button type="submit">Login</button>
-                    <!-- <small>Don't have an account? <a href={% url 'register' %}>Register here</a>!</small> -->
-                    <small><a href={% url 'index' %}>Forgot password?</a></small>
+                    <small class="hidden"><a href={% url 'index' %}>Forgot password?</a></small>
                 </p>
             </form>
         </div>

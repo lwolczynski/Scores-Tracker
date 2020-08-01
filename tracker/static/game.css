@@ -100,12 +100,6 @@
     border-left: 0;
 }
 
-.btn-pill {
-    font-size: smaller;
-    border: 1px solid #d9d7ce;
-    border-radius: 10px;
-}
-
 textarea {
     width: 100%;
     font-size: inherit;
@@ -138,20 +132,7 @@ input[type=number]::-webkit-outer-spin-button {
   margin: 0; 
 }
 
-.flex-gap > * {
-    margin: 5px 0 0 5px;
-}
-  
-.flex-gap {
-    display: flex;
-    margin: -5px 0 0 -5px;
-}
-
 #btn-save {
     padding: 10px;
     width: 100%;
-}
-
-@media screen and (max-width: 840px) {
-
 }

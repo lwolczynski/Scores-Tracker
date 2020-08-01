@@ -1,19 +1,23 @@
-#form-div {
+#narrow-div {
     margin-left: auto !important;
     margin-right: auto !important;
-    width: 40rem;
+    max-width: 40rem;
     padding: 10px;
     box-shadow: 0 1px 2px rgba(0,0,0,0.05),0 1px 4px rgba(0,0,0,0.05),0 2px 8px rgba(0,0,0,0.05);
 }
 
 @media (max-width: 40rem) {
-    #form-div {
+    #narrow-div {
         width: auto;
+    }
+    
+    .mobile-hidden {
+        display: none;
     }
 }
 
 @media screen and (max-width: 840px) {
-    #form-div {
+    #narrow-div {
         padding-top: 0px;
         box-shadow: none;
     }
@@ -27,6 +31,7 @@ ul {
 
 p {
     margin-bottom: 0;
+    margin-block-start: 10px;
 }
 
 .row-item-title-span {
@@ -53,4 +58,26 @@ input, select {
 
 .error {
     color: #ff6f69;
+}
+
+.flex-date {
+    flex: 4 0;
+}
+
+.flex-sport {
+    flex: 3 0;
+}
+@media (max-width: 40rem) {
+    .flex-sport {
+        flex: 2 0;
+    }
+}
+
+.flex-players {
+    flex: 1.5 0;
+}
+@media (max-width: 40rem) {
+    .flex-players {
+        flex: 1 0;
+    }
 }

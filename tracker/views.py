@@ -86,7 +86,7 @@ def new_game(request):
 #Game view
 def history(request):
     games = Game.objects.filter(owner=request.user).order_by('-id')
-    return render(request, "history.html", {'games': [game.as_dict() for game in games]})
+    return render(request, "history.html", {'games': [game.as_dict_with_players() for game in games]})
 
 #Game view
 def game(request, game_id, timestamp):

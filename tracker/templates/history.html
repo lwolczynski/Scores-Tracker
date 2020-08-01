@@ -1,18 +1,29 @@
 {% extends 'layout.html' %}
 {% load static %}
 
-{% block head %}
-<link rel="stylesheet" href={% static 'game.css' %}>
-{% endblock %}
+{% block head %}<link rel="stylesheet" href={% static 'narrow_page.css' %}>{% endblock %}
 
-{% block title %}History{% endblock %}
+{% block title %}Register{% endblock %}
 
 {% block content %}
-<div id="content" class="main containter">
-    <div class="containter">
-        {% for game in games %}
-            <div>{{ game }}<i class="fa fa-eye" aria-hidden="true"></i><i class="fa fa-pencil-square-o" aria-hidden="true"></i><i class="fa fa-trash-o" aria-hidden="true"></i></div>
-        {% endfor %}
+    <div id="content" class="main">
+        <div id="narrow-div">
+            <h4 class="row-item-title-span">History</h4>
+            {% for game in games %}
+            <div>
+                <div class="container spacing clickable">
+                    <div class="flex-date"><i class="fa fa-calendar" aria-hidden="true"></i> {{ game.time_created|date:'j M Y' }}, {{ game.time_created|time }}</div><div class="flex-sport"><i class="fa fa-bullseye" aria-hidden="true"></i> {{ game.sport }}<span class="mobile-hidden"> (holes: {{game.holes}})</span></div><div class="flex-players"><i class="fa fa-users" aria-hidden="true"></i> {{ game.players }}</div><div class="float-right"><i class="fa fa-chevron-down" aria-hidden="true"></i></div>
+                    <div class="break"></div>
+                    <div class="flex-gap float-right hidden"><button onclick="location.href=`{% url 'game' game.id game.timestamp %}`" class="btn-pill">View</button><button onclick="location.href=`{% url 'game_edit' game.id game.timestamp %}`" class="btn-pill">Edit</button><button class="btn-pill">Delete</button></div>
+                </div>
+            </div>
+            {% empty %}
+            <div class="spacing">Time to create your own...</div>
+            {% endfor %}
+        </div>
     </div>
-</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{% static 'history.js' %}"></script>
 {% endblock %}

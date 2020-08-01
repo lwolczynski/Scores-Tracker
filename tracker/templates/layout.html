@@ -12,9 +12,9 @@
 	<title>{% block title %}{% endblock %}</title>
     </head>
     <body>
-        <div id="sticky-top" class="container">
+        <div id="sticky-top">
             <div id="topbar" class="container">
-                <nav class="main container">
+                <nav class="main">
                     <div id="logo"><a href="{% url 'index' %}">MyScores</a></div>
                     {% if user.is_authenticated %}
                     <div class="nav-item hidden-on-mobile push"><a href="{% url 'new_game' %}">New game</a></div>
@@ -48,7 +48,7 @@
         {% block content %}{% endblock %}
         <footer>
             <small class="span-footer">
-                © 2020 created by <a href="https://github.com/lwolczynski">lwolczynski</a> <span id="show-credits">(show credits)</span>
+                © 2020 created by <a href="https://github.com/lwolczynski">lwolczynski</a> <span id="show-credits" class="clickable">(show credits)</span>
             </small>
             <small class="span-footer hidden zero-opacity">
                 Icons made by <a href="https://www.flaticon.com/authors/prettycons">prettycons</a> from <a href="https://www.flaticon.com/">www.flaticon.com</a>
