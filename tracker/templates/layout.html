@@ -15,7 +15,7 @@
         <div id="sticky-top">
             <div id="topbar" class="container">
                 <nav class="main">
-                    <div id="logo"><a href="{% url 'index' %}">MyScores</a></div>
+                    <div id="logo"><a href="{% url 'index' %}">MyScore</a></div>
                     {% if user.is_authenticated %}
                     <div class="nav-item hidden-on-mobile push"><a href="{% url 'new_game' %}">New game</a></div>
                     <div class="nav-item hidden-on-mobile"><a href="{% url 'history' %}">History</a></div>
