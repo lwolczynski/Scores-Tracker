@@ -14,7 +14,7 @@
                 <div class="container spacing clickable">
                     <div class="flex-date"><i class="fa fa-calendar" aria-hidden="true"></i> {{ game.time_created|date:'j M Y' }}, {{ game.time_created|time }}</div><div class="flex-sport"><i class="fa fa-bullseye" aria-hidden="true"></i> {{ game.sport }}<span class="mobile-hidden"> (holes: {{game.holes}})</span></div><div class="flex-players"><i class="fa fa-users" aria-hidden="true"></i> {{ game.players }}</div><div class="float-right"><i class="fa fa-chevron-down" aria-hidden="true"></i></div>
                     <div class="break"></div>
-                    <div class="flex-gap float-right hidden"><button onclick="location.href=`{% url 'game' game.id game.timestamp %}`" class="btn-pill">View</button><button onclick="location.href=`{% url 'game_edit' game.id game.timestamp %}`" class="btn-pill">Edit</button><button class="btn-pill">Delete</button></div>
+                    <div class="flex-gap hidden"><button onclick="location.href=`{% url 'game' game.id game.timestamp %}`" class="btn-pill">View</button><button onclick="location.href=`{% url 'game_edit' game.id game.timestamp %}`" class="btn-pill">Edit</button><button class="btn-pill">Delete</button></div>
                 </div>
             </div>
             {% empty %}

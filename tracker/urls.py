@@ -6,6 +6,7 @@ urlpatterns = [
     path("register/", views.register, name="register"),
     path("login/", views.login_request, name="login"),
     path("logout/", views.logout_request, name="logout"),
+    path('activate/<uidb64>/<token>', views.activate, name='activate'),
     path("new_game/", views.new_game, name="new_game"),
     path("history/", views.history, name="history"),
     path("game/<int:game_id>/<int:timestamp>/", views.game, name="game"),

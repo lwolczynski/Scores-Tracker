@@ -28,11 +28,11 @@
                 </nav>
                 <div id="burger" class="container"><button><i class="fa fa-bars"></i></button></div>
             </div>
-            <div id="messages" class="container">
+            <div id="messages">
             {% if messages %}
                 {% for message in messages %}
-                <div class="container alert alert-{{ message.tags }}">
-                    <div class="main container message">
+                <div class="alert alert-{{ message.tags }}">
+                    <div class="main message">
                         <div>
                             {{ message }}
                         </div>

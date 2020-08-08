@@ -3,3 +3,6 @@ Gunicorn==19.9.0
 psycopg2==2.8.4
 python-dotenv==0.13.0
 whitenoise
+python-http-client==3.2.7
+sendgrid==6.4.5
+starkbank-ecdsa==1.0.0

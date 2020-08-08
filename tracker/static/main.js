@@ -28,10 +28,10 @@ function installAlertDiscardListeners() {
 function addMessage(msg) {
     const mainMsgDiv = document.querySelector("#messages");
     const outerDiv = document.createElement("div");
-    outerDiv.classList.add("container", "alert", `alert-${msg.tag}`);
+    outerDiv.classList.add("alert", `alert-${msg.tag}`);
     mainMsgDiv.appendChild(outerDiv);
     const innerDiv = document.createElement("div");
-    innerDiv.classList.add("main", "container", "message");    
+    innerDiv.classList.add("main", "message");    
     outerDiv.appendChild(innerDiv);
     const msgDiv = document.createElement("div");
     msgDiv.innerHTML = `${msg.text}`;    

@@ -1,13 +1,25 @@
+import os
+import json
+
 from django.contrib import messages
 from django.http import HttpResponse, JsonResponse
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.sites.shortcuts import get_current_site
+from django.template.loader import render_to_string
+from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
+from django.utils.encoding import force_bytes, force_text
 from django.shortcuts import render, redirect
+from django.views.decorators.http import require_http_methods
+
 from .forms import SignUpForm, NewGameForm
-from .models import Game, Score9, Score18
+from .tokens import account_activation_token
+from .models import CustomUser, Game, Score9, Score18
 from datetime import datetime, timezone
-import json
+
+from sendgrid import SendGridAPIClient
+from sendgrid.helpers.mail import Mail, Email
 
 def index(request):
     return render(request = request,
@@ -20,13 +32,31 @@ def register(request):
     if request.method == 'POST':
         form = SignUpForm(request.POST)
         if form.is_valid():
-            form.save()
-            username = form.cleaned_data.get('username')
-            password = form.cleaned_data.get('password1')
-            user = authenticate(username=username, password=password)
-            login(request, user)
-            messages.success(request, "Registered and logged in succesfully.")
-            return redirect('index')
+            user = form.save(commit=False)
+            user.is_active = False
+            user.save()
+            site = get_current_site(request) # get the domain
+            message = render_to_string('emails/activate_account.html', {
+                'user': user,
+                'protocol': 'http',
+                'domain': site.domain,
+                'uid': urlsafe_base64_encode(force_bytes(user.pk)),
+                'token': account_activation_token.make_token(user),
+            })
+            # SendGrid setup
+            message = Mail(
+                from_email=Email("donotreply@myscore.golf", "MyScore"),
+                to_emails=user.email,
+                subject='Activate your MyScore account',
+                html_content=message)
+            try:
+                sg = SendGridAPIClient(os.environ.get('SENDGRID_API_KEY'))
+                response = sg.send(message)  # .status_code, .body, .headers
+                messages.warning(request, 'A verification email has been sent.')
+                return redirect('login')
+            except Exception as e:
+                print(e)  # e.message
+                messages.warning(request, str(e))
     else:
         form = SignUpForm
     return render(request, 'register.html', {'form': form})
@@ -57,6 +87,25 @@ def login_request(request):
 def logout_request(request):
     logout(request)
     messages.success(request, "Logged out succesfully.")
+    return redirect('index')
+
+#Activate account view
+def activate(request, uidb64, token):
+    """Check the activation token sent via mail."""
+    try:
+        uid = force_text(urlsafe_base64_decode(uidb64))
+        user = CustomUser.objects.get(pk=uid)
+    except (TypeError, ValueError, OverflowError, CustomUser.DoesNotExist) as e:
+        messages.warning(request, str(e))
+        user = None
+    if user is not None and account_activation_token.check_token(user, token):
+        user.is_active = True
+        user.email_confirmed = True
+        user.save()
+        login(request, user)
+        messages.success(request, 'Account activated. You have been logged in.')
+    else:
+        messages.warning(request, 'Account activation link is invalid.')
     return redirect('index')
 
 #New game view
@@ -177,13 +226,13 @@ def add_player(request, game_id, timestamp):
         return JsonResponse({'status': 'error'}, status=500)
     if game.holes.number == 9:
         scores_number = Score9.objects.filter(game=game).count()
-        if scores_number >= 7:
-            return JsonResponse({'status': 'ok', 'message': {'tag': 'danger', 'text': 'Maximum number of player players (6) reached!'}})
+        if scores_number >= 11:
+            return JsonResponse({'status': 'ok', 'message': {'tag': 'danger', 'text': 'Maximum number of player players (10) reached!'}})
         score = Score9(par_tracker=False, name='Player', game=game)
     elif game.holes.number == 18:
         scores_number = Score18.objects.filter(game=game).count()
-        if scores_number >= 7:
-            return JsonResponse({'status': 'ok', 'message': {'tag': 'danger', 'text': 'Maximum number of player players (6) reached!'}})
+        if scores_number >= 11:
+            return JsonResponse({'status': 'ok', 'message': {'tag': 'danger', 'text': 'Maximum number of player players (10) reached!'}})
         score = Score18(par_tracker=False, name='Player', game=game)
     score.save()
     return JsonResponse({'status': 'ok', 'message': {'tag': 'success', 'text': 'New player added.'}, 'score': score.as_dict()})
