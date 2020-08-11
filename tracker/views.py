@@ -13,8 +13,8 @@ from django.utils.encoding import force_bytes, force_text
 from django.shortcuts import render, redirect
 from django.views.decorators.http import require_http_methods
 
-from .forms import SignUpForm, NewGameForm
-from .tokens import account_activation_token
+from .forms import SignUpForm, NewGameForm, ForgotPasswordForm, ResetPasswordForm
+from .tokens import account_activation_token, password_reset_token
 from .models import CustomUser, Game, Score9, Score18
 from datetime import datetime, timezone
 
@@ -91,7 +91,6 @@ def logout_request(request):
 
 #Activate account view
 def activate(request, uidb64, token):
-    """Check the activation token sent via mail."""
     try:
         uid = force_text(urlsafe_base64_decode(uidb64))
         user = CustomUser.objects.get(pk=uid)
@@ -106,6 +105,87 @@ def activate(request, uidb64, token):
         messages.success(request, 'Account activated. You have been logged in.')
     else:
         messages.warning(request, 'Account activation link is invalid.')
+    return redirect('index')
+
+#Forgot password view
+def forgot_password(request):
+    if request.user.is_authenticated:
+        return redirect('index')
+    if request.method == "POST":
+        form = ForgotPasswordForm(request.POST)
+        if form.is_valid():
+            email = request.POST.get('email')
+            try:
+                user = CustomUser.objects.get(email=email)
+            except (CustomUser.DoesNotExist) as e:
+                user = None
+            if user is not None:
+                site = get_current_site(request) # get the domain
+                message = render_to_string('emails/reset_password.html', {
+                    'user': user,
+                    'protocol': 'http',
+                    'domain': site.domain,
+                    'uid': urlsafe_base64_encode(force_bytes(user.pk)),
+                    'token': password_reset_token.make_token(user),
+                })
+                # SendGrid setup
+                message = Mail(
+                    from_email=Email("donotreply@myscore.golf", "MyScore"),
+                    to_emails=user.email,
+                    subject='Reset password for MyScore account',
+                    html_content=message)
+                try:
+                    sg = SendGridAPIClient(os.environ.get('SENDGRID_API_KEY'))
+                    response = sg.send(message)  # .status_code, .body, .headers
+                except Exception as e:
+                    print(e)  # e.message
+            messages.warning(request, 'If this email address exists in our database, password reset message will be sent to it.')
+        else:
+            messages.warning(request, 'Email not submitted.')
+            return render(request, 'forgot.html', {'form': form})
+    return render(request, 'forgot.html', {'form': ForgotPasswordForm})
+
+def reset_password(request, uidb64, token):
+    if request.user.is_authenticated:
+        messages.warning(request, 'Access restriced. User already logged in.')
+        return redirect('index')
+    if request.method == 'POST':
+        try:
+            uid = force_text(urlsafe_base64_decode(uidb64))
+            user = CustomUser.objects.get(pk=uid)
+        except (TypeError, ValueError, OverflowError, CustomUser.DoesNotExist) as e:
+            messages.warning(request, str(e))
+            user = None
+        if user is not None and password_reset_token.check_token(user, token):
+            form = ResetPasswordForm(user=user, data=request.POST)
+            if form.is_valid():
+                form.save()
+                messages.success(request, 'Password has been reset successfully.')
+                return redirect('login')
+            else:
+                context = {
+                    'form': form,
+                    'uid': uidb64,
+                    'token': token
+                }
+                return render(request, 'reset.html', context)
+        else:
+            messages.warning(request, 'Password reset link is invalid.')
+    try:
+        uid = force_text(urlsafe_base64_decode(uidb64))
+        user = CustomUser.objects.get(pk=uid)
+    except (TypeError, ValueError, OverflowError, CustomUser.DoesNotExist) as e:
+        messages.warning(request, str(e))
+        user = None
+    if user is not None and password_reset_token.check_token(user, token):
+        context = {
+            'form': ResetPasswordForm(user),
+            'uid': uidb64,
+            'token': token
+        }
+        return render(request, 'reset.html', context)
+    else:
+        messages.warning(request, 'Password reset link is invalid.')
     return redirect('index')
 
 #New game view

@@ -1,6 +1,6 @@
 from django import forms
 from django.forms import ModelForm
-from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.forms import UserCreationForm, PasswordResetForm, SetPasswordForm
 from django.core.exceptions import ValidationError
 from .models import CustomUser, HolesNumber, Sport, Game
 
@@ -18,6 +18,19 @@ class SignUpForm(UserCreationForm):
     class Meta:
         model = CustomUser
         fields = ("username", "first_name", "last_name", "email", "password1", "password2")
+
+#Forgot password form
+class ForgotPasswordForm(PasswordResetForm):
+    pass
+
+#New password form
+class ResetPasswordForm(SetPasswordForm):
+    new_password2 = forms.CharField(
+        label="New password confirmation",
+        help_text="Enter the same password as before, for verification.",
+        strip=False,
+        widget=forms.PasswordInput,
+    )
 
 #New game form
 class NewGameForm(ModelForm):

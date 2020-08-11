@@ -5,7 +5,6 @@ from django.contrib.auth.models import AbstractUser
 class CustomUser(AbstractUser):
     email = models.EmailField(unique=True)
     email_confirmed = models.BooleanField(default=False)
-    reset_password = models.BooleanField(default=False)
 
 class Sport(models.Model):
     name = models.CharField(max_length=30)

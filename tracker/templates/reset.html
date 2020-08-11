@@ -3,25 +3,33 @@
 
 {% block head %}<link rel="stylesheet" href={% static 'narrow_page.css' %}>{% endblock %}
 
-{% block title %}Login{% endblock %}
+{% block title %}Reset password{% endblock %}
 
 {% block content %}
     <div id="content" class="main">
         <div id="narrow-div">
-            <h4 class="row-item-title-span">Login</h4>
+            <h4 class="row-item-title-span">Reset password</h4>
             <form method="POST">
                 {% csrf_token %}
                 {% for field in form %}
                 <p>
                     {{ field.label_tag }}<br>
                     {{ field }}<br>
+                    {% if field.help_text %}
+                    <small>{{ field.help_text | safe }}</small>
+                    {% endif %}
+                    {% for error in field.errors %}
+                    <br><small class="error">{{ error | safe }}</small>
+                    {% endfor %}
                 </p>
                 {% endfor %}
                 <p id="footer">
-                    <button type="submit">Login</button>
-                    <small><a href={% url 'forgot_password' %}>Forgot password?</a></small>
+                    <button type="submit">Submit</button>
                 </p>
             </form>
         </div>
     </div>
+{% endblock %}
+
+{% block scripts %}
 {% endblock %}

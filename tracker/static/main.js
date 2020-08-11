@@ -8,8 +8,8 @@ function installBurgerListener() {
     });
 }
 
-function makeAlertsFadeOut() {
-    alerts = document.querySelectorAll(".alert");
+function makeSuccessAlertsFadeOut() {
+    alerts = document.querySelectorAll(".alert-success");
     alerts.forEach(alert => {
         alert.addEventListener('transitionend', () => alert.remove());
         setTimeout(() => alert.style.opacity = '0.2', 0);
@@ -50,7 +50,9 @@ function addMessage(msg) {
         this.closest("div").remove();
     });
     outerDiv.addEventListener('transitionend', () => outerDiv.remove());
-    setTimeout(() => outerDiv.style.opacity = '0.2', 0);
+    if (msg.tag == 'success') {
+        setTimeout(() => outerDiv.style.opacity = '0.2', 0);
+    }
 }
 
 function fadeOutCredit(el) {
@@ -94,6 +96,6 @@ function animateCredits() {
 // Run at start
 
 installBurgerListener();
-makeAlertsFadeOut();
+makeSuccessAlertsFadeOut();
 installAlertDiscardListeners();
 animateCredits();
