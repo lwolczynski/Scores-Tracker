@@ -19,7 +19,7 @@ class HolesNumber(models.Model):
         return str(self.number)
 
 class Game(models.Model):
-    owner = models.ForeignKey(CustomUser, on_delete = models.PROTECT)
+    owner = models.ForeignKey(CustomUser, on_delete = models.CASCADE)
     time_created = models.DateTimeField(editable=False)
     sport = models.ForeignKey(Sport, on_delete = models.PROTECT)
     holes = models.ForeignKey(HolesNumber, on_delete = models.PROTECT)
@@ -61,7 +61,7 @@ class Game(models.Model):
 class ScoreTable(models.Model):
     par_tracker = models.BooleanField(default=False)
     name = models.CharField(max_length=30, blank=True)
-    game = models.ForeignKey(Game, on_delete = models.PROTECT)
+    game = models.ForeignKey(Game, on_delete = models.CASCADE)
     
     class Meta:
         abstract = True

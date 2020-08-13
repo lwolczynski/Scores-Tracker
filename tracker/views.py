@@ -13,7 +13,7 @@ from django.utils.encoding import force_bytes, force_text
 from django.shortcuts import render, redirect
 from django.views.decorators.http import require_http_methods
 
-from .forms import SignUpForm, NewGameForm, ForgotPasswordForm, ResetPasswordForm
+from .forms import *
 from .tokens import account_activation_token, password_reset_token
 from .models import CustomUser, Game, Score9, Score18
 from datetime import datetime, timezone
@@ -145,6 +145,7 @@ def forgot_password(request):
             return render(request, 'forgot.html', {'form': form})
     return render(request, 'forgot.html', {'form': ForgotPasswordForm})
 
+#Reset password view
 def reset_password(request, uidb64, token):
     if request.user.is_authenticated:
         messages.warning(request, 'Access restriced. User already logged in.')
@@ -187,6 +188,36 @@ def reset_password(request, uidb64, token):
     else:
         messages.warning(request, 'Password reset link is invalid.')
     return redirect('index')
+
+#User account view
+@login_required
+def my_account(request):
+    if request.method == 'POST':
+        form = UserUpdateForm(instance=request.user, data=request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Your account has been successfully updated.')
+            return redirect('my_account')
+    else:
+        form = UserUpdateForm(instance=request.user)
+    return render(request, 'my_account.html', {'form': form})
+
+@login_required
+def delete_account(request):
+    if request.method == 'POST':
+        form = UserDeleteForm(instance=request.user, data=request.POST)
+        if form.is_valid():
+            user = form.save(commit=False)
+            try:
+                user.delete()
+            except:
+                messages.error(request, 'Something went wrong... contact admin for help.')
+                return render(request, 'delete_account.html', {'form': form})
+            messages.warning(request, 'Your account has been successfully deleted.')
+            return redirect('index')
+    else:
+        form = UserDeleteForm(instance=request.user)
+    return render(request, 'delete_account.html', {'form': form})
 
 #New game view
 @login_required
@@ -307,12 +338,12 @@ def add_player(request, game_id, timestamp):
     if game.holes.number == 9:
         scores_number = Score9.objects.filter(game=game).count()
         if scores_number >= 11:
-            return JsonResponse({'status': 'ok', 'message': {'tag': 'danger', 'text': 'Maximum number of player players (10) reached!'}})
+            return JsonResponse({'status': 'ok', 'message': {'tag': 'error', 'text': 'Maximum number of player players (10) reached.'}})
         score = Score9(par_tracker=False, name='Player', game=game)
     elif game.holes.number == 18:
         scores_number = Score18.objects.filter(game=game).count()
         if scores_number >= 11:
-            return JsonResponse({'status': 'ok', 'message': {'tag': 'danger', 'text': 'Maximum number of player players (10) reached!'}})
+            return JsonResponse({'status': 'ok', 'message': {'tag': 'error', 'text': 'Maximum number of player players (10) reached.'}})
         score = Score18(par_tracker=False, name='Player', game=game)
     score.save()
     return JsonResponse({'status': 'ok', 'message': {'tag': 'success', 'text': 'New player added.'}, 'score': score.as_dict()})

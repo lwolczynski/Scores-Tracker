@@ -32,6 +32,46 @@ class ResetPasswordForm(SetPasswordForm):
         widget=forms.PasswordInput,
     )
 
+# User personal data update form 
+class UserUpdateForm(forms.ModelForm):
+    first_name = forms.CharField(max_length=30, required=False, help_text='Optional.')
+    last_name = forms.CharField(max_length=30, required=False, help_text='Optional.')
+    current_password = forms.CharField(
+        label="Current password",
+        help_text="Enter your current password for verification.",
+        strip=False,
+        widget=forms.PasswordInput,
+    )
+
+    class Meta:
+        model = CustomUser
+        fields = ("username", "first_name", "last_name", "current_password")
+
+    def clean_current_password(self):
+        valid = self.instance.check_password(self.cleaned_data['current_password'])
+        if not valid:
+            raise forms.ValidationError("Password incorrect.")
+        return valid
+
+# User personal data update form 
+class UserDeleteForm(forms.ModelForm):
+    current_password = forms.CharField(
+        label="Current password",
+        help_text="Enter your current password for verification.",
+        strip=False,
+        widget=forms.PasswordInput,
+    )
+
+    class Meta:
+        model = CustomUser
+        fields = ("current_password", )
+
+    def clean_current_password(self):
+        valid = self.instance.check_password(self.cleaned_data['current_password'])
+        if not valid:
+            raise forms.ValidationError("Password incorrect.")
+        return valid
+
 #New game form
 class NewGameForm(ModelForm):
     sport = forms.Select(

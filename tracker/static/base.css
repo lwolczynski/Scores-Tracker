@@ -165,25 +165,32 @@ footer {
     text-align: center;
 }
 
+@keyframes fade-out {
+    0% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0.2;
+    }
+}
+
 .alert-success {
     color: #155724;
     background-color: #d4edda;
     border-color: #c3e6cb;
-    transition: opacity 3s;
+    animation: fade-out 3s;
 }
 
 .alert-warning {
     color: #856404;
     background-color: #fff3cd;
     border-color: #ffeeba;
-    transition: none;
 }
 
-.alert-danger {
+.alert-error {
     color: #721c24;
     background-color: #f8d7da;
     border-color: #f5c6cb;
-    transition: none;
 }
 
 .close:hover {

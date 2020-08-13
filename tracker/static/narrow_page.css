@@ -81,3 +81,20 @@ input, select {
         flex: 1 0;
     }
 }
+
+@keyframes blinkingText {
+    0% {
+        color: red;
+    }
+    50% {
+        color: inherit;
+    }
+    100% {
+        color: red;
+    }
+}
+
+.delete-warning {
+    animation: blinkingText 3s infinite;
+}
+

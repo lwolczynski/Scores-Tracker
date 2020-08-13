@@ -1,0 +1,46 @@
+{% extends 'layout.html' %}
+{% load static %}
+
+{% block head %}<link rel="stylesheet" href={% static 'narrow_page.css' %}>{% endblock %}
+
+{% block title %}My account{% endblock %}
+
+{% block content %}
+    <div id="content" class="main">
+        <div id="narrow-div">
+            <h4 class="row-item-title-span">My account</h4>
+            <p>
+                <label for="my_account_dropdown">Go to:</label>
+                <select name="pages" id="my_account_dropdown">
+                    <option value="#" selected>Change personal data</option>
+                    <option value="#">Change email</option>
+                    <option value="#">Change password</option>
+                    <option value="/my_account/delete">Delete account</option>
+                </select>
+            </p>
+            <hr>
+            <form method="POST">
+                {% csrf_token %}
+                {% for field in form %}
+                <p>
+                    {{ field.label_tag }}<br>
+                    {{ field }}<br>
+                    {% if field.help_text %}
+                    <small>{{ field.help_text | safe }}</small>
+                    {% endif %}
+                    {% for error in field.errors %}
+                    <br><small class="error">{{ error | safe }}</small>
+                    {% endfor %}
+                </p>
+                {% endfor %}
+                <p id="footer">
+                    <button type="submit">Update</button>
+                </p>
+            </form>
+        </div>
+    </div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{% static 'my_account.js' %}"></script>
+{% endblock %}

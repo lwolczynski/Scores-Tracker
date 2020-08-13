@@ -11,7 +11,7 @@ function installBurgerListener() {
 function makeSuccessAlertsFadeOut() {
     alerts = document.querySelectorAll(".alert-success");
     alerts.forEach(alert => {
-        alert.addEventListener('transitionend', () => alert.remove());
+        alert.addEventListener('animationend', () => alert.remove());
         setTimeout(() => alert.style.opacity = '0.2', 0);
     });
 }
@@ -49,9 +49,8 @@ function addMessage(msg) {
     btn.addEventListener("click", function() {
         this.closest("div").remove();
     });
-    outerDiv.addEventListener('transitionend', () => outerDiv.remove());
     if (msg.tag == 'success') {
-        setTimeout(() => outerDiv.style.opacity = '0.2', 0);
+        outerDiv.addEventListener('animationend', () => outerDiv.remove());
     }
 }
 

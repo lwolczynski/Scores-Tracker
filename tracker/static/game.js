@@ -172,7 +172,7 @@ const makeScoreKeeper = (holesNumber, editable) => {
             }).then((response) => {
                 addMessage(response.data.message);
             }).catch((error) => {
-                addMessage({'tag': 'danger', 'text': 'Something went wrong. Try again.'});
+                addMessage({'tag': 'error', 'text': 'Something went wrong. Try again.'});
             });
         },
         addPlayer() {
@@ -187,7 +187,7 @@ const makeScoreKeeper = (holesNumber, editable) => {
                 }
                 addMessage(response.data.message);
             }).catch((error) => {
-                addMessage({'tag': 'danger', 'text': 'Something went wrong. Try again.'});
+                addMessage({'tag': 'error', 'text': 'Something went wrong. Try again.'});
             });
         },
     }
