@@ -3,9 +3,9 @@ import json
 
 from django.contrib import messages
 from django.http import HttpResponse, JsonResponse
-from django.contrib.auth import login, authenticate, logout
+from django.contrib.auth import login, authenticate, logout, update_session_auth_hash
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth.forms import AuthenticationForm, PasswordResetForm
 from django.contrib.sites.shortcuts import get_current_site
 from django.template.loader import render_to_string
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
@@ -86,7 +86,7 @@ def login_request(request):
 @login_required
 def logout_request(request):
     logout(request)
-    messages.success(request, "Logged out succesfully.")
+    messages.warning(request, "Logged out succesfully.")
     return redirect('index')
 
 #Activate account view
@@ -112,7 +112,7 @@ def forgot_password(request):
     if request.user.is_authenticated:
         return redirect('index')
     if request.method == "POST":
-        form = ForgotPasswordForm(request.POST)
+        form = PasswordResetForm(request.POST)
         if form.is_valid():
             email = request.POST.get('email')
             try:
@@ -143,7 +143,7 @@ def forgot_password(request):
         else:
             messages.warning(request, 'Email not submitted.')
             return render(request, 'forgot.html', {'form': form})
-    return render(request, 'forgot.html', {'form': ForgotPasswordForm})
+    return render(request, 'forgot.html', {'form': PasswordResetForm})
 
 #Reset password view
 def reset_password(request, uidb64, token):
@@ -161,7 +161,7 @@ def reset_password(request, uidb64, token):
             form = ResetPasswordForm(user=user, data=request.POST)
             if form.is_valid():
                 form.save()
-                messages.success(request, 'Password has been reset successfully.')
+                messages.warning(request, 'Password has been reset successfully.')
                 return redirect('login')
             else:
                 context = {
@@ -196,11 +196,36 @@ def my_account(request):
         form = UserUpdateForm(instance=request.user, data=request.POST)
         if form.is_valid():
             form.save()
-            messages.success(request, 'Your account has been successfully updated.')
+            messages.warning(request, 'Your account has been successfully updated.')
             return redirect('my_account')
     else:
         form = UserUpdateForm(instance=request.user)
     return render(request, 'my_account.html', {'form': form})
+
+@login_required
+def change_email(request):
+    if request.method == 'POST':
+        form = EmailChangeForm(instance=request.user, data=request.POST)
+        if form.is_valid():
+            form.save()
+            messages.warning(request, 'Email address was successfully updated.')
+            return redirect('change_email')
+    else:
+        form = EmailChangeForm(instance=request.user)
+    return render(request, 'change_email.html', {'form': form})
+
+@login_required
+def change_password(request):
+    if request.method == 'POST':
+        form = ChangePasswordForm(request.user, request.POST)
+        if form.is_valid():
+            user = form.save()
+            update_session_auth_hash(request, user) 
+            messages.warning(request, 'Password was successfully updated.')
+            return redirect('change_password')
+    else:
+        form = ChangePasswordForm(request.user)
+    return render(request, 'change_password.html', {'form': form})
 
 @login_required
 def delete_account(request):
@@ -244,6 +269,7 @@ def new_game(request):
     return render(request, 'new_game.html', {'form': form})
 
 #Game view
+@login_required
 def history(request):
     games = Game.objects.filter(owner=request.user).order_by('-id')
     return render(request, "history.html", {'games': [game.as_dict_with_players() for game in games]})

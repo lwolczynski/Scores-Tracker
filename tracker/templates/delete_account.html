@@ -13,8 +13,8 @@
                 <label for="my_account_dropdown">Go to:</label>
                 <select name="pages" id="my_account_dropdown">
                     <option value="/my_account">Change personal data</option>
-                    <option value="#">Change email</option>
-                    <option value="#">Change password</option>
+                    <option value="/my_account/change_email">Change email</option>
+                    <option value="/my_account/change_password">Change password</option>
                     <option value="#" selected>Delete account</option>
                 </select>
             </p>
@@ -28,9 +28,13 @@
                     {% if field.help_text %}
                     <small>{{ field.help_text | safe }}</small>
                     {% endif %}
+                    {% if field.errors %}
+                    <ul>
                     {% for error in field.errors %}
-                    <br><small class="error">{{ error | safe }}</small>
+                    <li><small class="error">{{ error | safe }}</small></li>
                     {% endfor %}
+                    </ul>
+                    {% endif %}
                 </p>
                 {% endfor %}
                 <p class="delete-warning">Warning! You are about to delete your account. Remember that this action is irreversible. It would be sad to see you go...</p>

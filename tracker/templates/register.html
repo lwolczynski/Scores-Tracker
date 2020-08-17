@@ -18,9 +18,13 @@
                     {% if field.help_text %}
                     <small>{{ field.help_text | safe }}</small>
                     {% endif %}
+                    {% if field.errors %}
+                    <ul>
                     {% for error in field.errors %}
-                    <br><small class="error">{{ error | safe }}</small>
+                    <li><small class="error">{{ error | safe }}</small></li>
                     {% endfor %}
+                    </ul>
+                    {% endif %}
                 </p>
                 {% endfor %}
                 <p id="footer">
