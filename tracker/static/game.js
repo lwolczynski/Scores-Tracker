@@ -93,9 +93,13 @@ const makeScoreKeeper = (holesNumber, editable) => {
             const thead = this.table.querySelector('thead');
             const trHeader = thead.querySelector("tr");
             const th = document.createElement("th");
+            th.dataset.score_id = score.id;
             trHeader.appendChild(th);
             const input = this.createNameInput(score);
             th.appendChild(input);
+            if (!(score.par_tracker)) {
+                th.appendChild(this.createDeletePlayerBtn(score));
+            }            
             const tbody = this.table.querySelector('tbody');
             const trs = tbody.querySelectorAll('tr');
             const keys = Object.keys(score.scoring);
@@ -107,8 +111,9 @@ const makeScoreKeeper = (holesNumber, editable) => {
                     td.appendChild(input);
                 } else {
                     td.innerHTML = sum(Object.values(score.scoring));
-                    td.setAttribute('data-game_id', score.id);
+                    td.classList.add('total');
                 }
+                td.dataset.score_id = score.id;
             }
         },
         createNameInput(score) {
@@ -125,6 +130,20 @@ const makeScoreKeeper = (holesNumber, editable) => {
                 });
             }
             return input;
+        },
+        createDeletePlayerBtn(score) {
+            const btn = document.createElement("button");
+            btn.setAttribute('type', 'button');
+            btn.setAttribute('class', 'delete');
+            btn.setAttribute('aria-label', 'Delete');    
+            const span = document.createElement("span");
+            span.setAttribute('aria-hidden', 'true');
+            span.innerHTML = `×`;
+            btn.appendChild(span);
+            btn.addEventListener('click', (e) => {
+                this.deletePlayer(score);
+            });
+            return btn;
         },
         createScoreInput(score, key) {
             const input = document.createElement("input");
@@ -148,7 +167,7 @@ const makeScoreKeeper = (holesNumber, editable) => {
             return input;
         },
         updateTotal(score) {
-            const totalField = document.querySelector(`[data-game_id='${score.id}']`);
+            const totalField = document.querySelector(`.total[data-score_id='${score.id}']`);
             totalField.innerHTML = sum(Object.values(score.scoring));
         },
         addSaveListener() {
@@ -184,6 +203,21 @@ const makeScoreKeeper = (holesNumber, editable) => {
                 if (response.data.message.tag === "success") {
                     this.scores.push(response.data.score);
                     this.createEditablePlayerRow(response.data.score);
+                }
+                addMessage(response.data.message);
+            }).catch((error) => {
+                addMessage({'tag': 'error', 'text': 'Something went wrong. Try again.'});
+            });
+        },
+        deletePlayer(score) {
+            axios({
+                method: 'post',
+                url: 'delete_player',
+                data: {score_id: score.id},
+            }).then((response) => {
+                if (response.data.message.tag === "success") {
+                    this.scores.pop(score);
+                    this.table.querySelectorAll(`[data-score_id='${score.id}']`).forEach(el => el.remove());
                 }
                 addMessage(response.data.message);
             }).catch((error) => {

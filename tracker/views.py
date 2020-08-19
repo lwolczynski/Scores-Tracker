@@ -308,12 +308,12 @@ def get_scores(request, game_id, timestamp):
         return JsonResponse({'status': 'error'}, status=500)
     if game.holes.number == 9:
         try:
-            scores = Score9.objects.filter(game=game)
+            scores = Score9.objects.filter(game=game).order_by('id')
         except Score9.DoesNotExist:
             return JsonResponse({'status': 'error'}, status=500)
     elif game.holes.number == 18:
         try:
-            scores = Score18.objects.filter(game=game)
+            scores = Score18.objects.filter(game=game).order_by('id')
         except Score18.DoesNotExist:
             return JsonResponse({'status': 'error'}, status=500)
     else:
@@ -373,3 +373,29 @@ def add_player(request, game_id, timestamp):
         score = Score18(par_tracker=False, name='Player', game=game)
     score.save()
     return JsonResponse({'status': 'ok', 'message': {'tag': 'success', 'text': 'New player added.'}, 'score': score.as_dict()})
+
+#Delete player view
+@login_required
+def delete_player(request, game_id, timestamp):
+    data = json.loads(request.body.decode('utf-8'))
+    date = datetime.utcfromtimestamp(timestamp).replace(tzinfo=timezone.utc).astimezone(tz=None)
+    try:
+        game = Game.objects.get(pk=game_id)
+    except Game.DoesNotExist:
+        return JsonResponse({'status': 'error'}, status=500)
+    if game.time_created!=date or game.owner!=request.user:
+        return JsonResponse({'status': 'error'}, status=500)
+    if game.holes.number == 9:
+        try:
+            score = Score9.objects.get(pk=data['score_id'])
+        except Score9.DoesNotExist:
+            return JsonResponse({'status': 'error'}, status=500)
+    elif game.holes.number == 18:
+        try:
+            score = Score18.objects.get(pk=data['score_id'])
+        except Score18.DoesNotExist:
+            return JsonResponse({'status': 'error'}, status=500)
+    if score.game!=game:
+        return JsonResponse({'status': 'error'}, status=500)
+    score.delete()
+    return JsonResponse({'status': 'ok', 'message': {'tag': 'success', 'text': 'Player deleted.'}})
