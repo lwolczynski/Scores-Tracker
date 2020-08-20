@@ -141,9 +141,30 @@ const makeScoreKeeper = (holesNumber, editable) => {
             span.innerHTML = `×`;
             btn.appendChild(span);
             btn.addEventListener('click', (e) => {
-                this.deletePlayer(score);
+                this.showDeleteModal(score);
             });
             return btn;
+        },
+        showDeleteModal(score) {
+            const modal = document.getElementById("myModal");
+            const modalCloseBtn = modal.querySelector('.close-modal');
+            const modalDeleteBtn = modal.querySelector('#btn-confirm-delete');
+            modal.style.display = "block";
+            // When the user clicks on (x), close the modal
+            modalCloseBtn.onclick = function(event) {
+                modal.style.display = "none";
+            }
+            // When the user clicks on Delete button, delete player and close the modal
+            modalDeleteBtn.onclick = () => {
+                this.deletePlayer(score);
+                modal.style.display = "none";
+            }
+            // When the user clicks anywhere outside of the modal, close it
+            window.onclick = function(event) {
+                if (event.target == modal) {
+                    modal.style.display = "none";
+                }
+            }
         },
         createScoreInput(score, key) {
             const input = document.createElement("input");
