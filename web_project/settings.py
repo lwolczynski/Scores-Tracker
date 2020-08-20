@@ -30,7 +30,7 @@ SECRET_KEY = os.getenv("SECRET")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['127.0.0.1:8080', 'scores-tracker.herokuapp.com', 'myscore.golf']
+ALLOWED_HOSTS = ['127.0.0.1', 'scores-tracker.herokuapp.com', 'myscore.golf']
 
 
 # Application definition
@@ -133,3 +133,5 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(PROJECT_ROOT, 'static')
+
+SECURE_SSL_REDIRECT = True
