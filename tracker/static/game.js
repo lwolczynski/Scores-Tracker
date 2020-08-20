@@ -239,8 +239,8 @@ const makeScoreKeeper = (holesNumber, editable) => {
                 if (response.data.message.tag === "success") {
                     this.scores.pop(score);
                     this.table.querySelectorAll(`[data-score_id='${score.id}']`).forEach(el => el.remove());
+                    addMessage(response.data.message);
                 }
-                addMessage(response.data.message);
             }).catch((error) => {
                 addMessage({'tag': 'error', 'text': 'Something went wrong. Try again.'});
             });
