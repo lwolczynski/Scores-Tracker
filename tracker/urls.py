@@ -15,6 +15,7 @@ urlpatterns = [
     path("my_account/delete/", views.delete_account, name="delete_account"),
     path("new_game/", views.new_game, name="new_game"),
     path("history/", views.history, name="history"),
+    path("history/delete_game", views.delete_game, name="delete_game"),
     path("game/<int:game_id>/<int:timestamp>/", views.game, name="game"),
     path("game/<int:game_id>/<int:timestamp>/edit", views.game_edit, name="game_edit"),
     path("game/<int:game_id>/<int:timestamp>/add_player", views.add_player, name="add_player"),

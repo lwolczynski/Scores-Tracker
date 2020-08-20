@@ -6,22 +6,37 @@
 {% block title %}History{% endblock %}
 
 {% block content %}
-    <div id="content" class="main">
-        <div id="narrow-div">
-            <h4 class="row-item-title-span">History</h4>
-            {% for game in games %}
-            <div>
-                <div class="container spacing clickable">
-                    <div class="flex-date"><i class="fa fa-calendar" aria-hidden="true"></i> {{ game.time_created|date:'j M Y' }}, {{ game.time_created|time }}</div><div class="flex-sport"><i class="fa fa-bullseye" aria-hidden="true"></i> {{ game.sport }}<span class="mobile-hidden"> (holes: {{game.holes}})</span></div><div class="flex-players"><i class="fa fa-users" aria-hidden="true"></i> {{ game.players }}</div><div class="float-right"><i class="fa fa-chevron-down" aria-hidden="true"></i></div>
-                    <div class="break"></div>
-                    <div class="flex-gap hidden"><button onclick="location.href=`{% url 'game' game.id game.timestamp %}`" class="btn-pill">View</button><button onclick="location.href=`{% url 'game_edit' game.id game.timestamp %}`" class="btn-pill">Edit</button><button class="btn-pill">Delete</button></div>
-                </div>
+<div id="content" class="main">
+    <div id="narrow-div">
+        <h4 class="row-item-title-span">History</h4>
+        {% for game in games %}
+        <div>
+            <div class="container spacing clickable">
+                <div class="flex-date"><i class="fa fa-calendar" aria-hidden="true"></i> {{ game.time_created|date:'j M Y' }}, {{ game.time_created|time }}</div><div class="flex-sport"><i class="fa fa-bullseye" aria-hidden="true"></i> {{ game.sport }}<span class="mobile-hidden"> (holes: {{game.holes}})</span></div><div class="flex-players"><i class="fa fa-users" aria-hidden="true"></i> {{ game.players }}</div><div class="float-right"><i class="fa fa-chevron-down" aria-hidden="true"></i></div>
+                <div class="break"></div>
+                <div class="flex-gap hidden"><button onclick="location.href=`{% url 'game' game.id game.timestamp %}`" class="btn-pill">View</button><button onclick="location.href=`{% url 'game_edit' game.id game.timestamp %}`" class="btn-pill">Edit</button><button data-game_id={{game.id}} class="btn-pill btn-game-delete">Delete</button></div>
             </div>
-            {% empty %}
-            <div class="spacing">Time to create your own...</div>
-            {% endfor %}
+        </div>
+        {% empty %}
+        <div class="spacing">Time to create your own...</div>
+        {% endfor %}
+    </div>
+</div>
+<!-- The Modal -->
+<div id="myModal" class="modal">
+    <!-- Modal content -->
+    <div class="modal-content">
+        <div class="modal-header flex">
+            <h3 class="modal-title">Are you sure you want to delete this game?</h3>
+            <button type="button" class="float-right close-modal" aria-label="Delete"><span aria-hidden="true">×</span></button>
+        </div>
+        <div class="modal-body">
+            <div class="spacing">
+                <button id="btn-confirm-delete" class="btn-wide">Delete</button>
+            </div>
         </div>
     </div>
+</div>
 {% endblock %}
 
 {% block scripts %}

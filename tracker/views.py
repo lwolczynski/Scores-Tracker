@@ -398,4 +398,17 @@ def delete_player(request, game_id, timestamp):
     if score.game!=game:
         return JsonResponse({'status': 'error'}, status=500)
     score.delete()
-    return JsonResponse({'status': 'ok', 'message': {'tag': 'success', 'text': 'Player deleted.'}})
+    return JsonResponse({'status': 'ok', 'message': {'tag': 'success', 'text': 'Player deleted successfully.'}})
+
+#Delete game view
+@login_required
+def delete_game(request):
+    data = json.loads(request.body.decode('utf-8'))
+    try:
+        game = Game.objects.get(pk=data['game_id'])
+    except Game.DoesNotExist:
+        return JsonResponse({'status': 'error'}, status=500)
+    if game.owner!=request.user:
+        return JsonResponse({'status': 'error'}, status=500)
+    game.delete()
+    return JsonResponse({'status': 'ok', 'message': {'tag': 'success', 'text': 'Game deleted successfully.'}})

@@ -137,11 +137,6 @@ input[type=number]::-webkit-outer-spin-button {
     width: 80%;
 }
 
-#btn-save, #btn-confirm-delete {
-    padding: 10px;
-    width: 100%;
-}
-
 .delete {
     border: none;
     background-color: transparent;
