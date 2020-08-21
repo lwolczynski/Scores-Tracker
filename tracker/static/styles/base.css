@@ -212,6 +212,11 @@ footer {
     color: inherit;
 }
 
+.close-modal {
+    position: absolute;
+    right: 0;
+}
+
 .float-right {
     float: right;
     margin-left: auto !important;
