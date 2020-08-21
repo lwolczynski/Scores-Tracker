@@ -1,7 +1,7 @@
 {% extends 'layout.html' %}
 {% load static %}
 
-{% block head %}<link rel="stylesheet" href={% static 'index.css' %}>{% endblock %}
+{% block head %}<link rel="stylesheet" href={% static 'styles/index.css' %}>{% endblock %}
 
 {% block title %}MyScore{% endblock %}
 
@@ -9,7 +9,7 @@
 <div id="content" class="main">
     <div id="landing-top">
         <div id="image-div">
-            <img src={% static 'card.jpg' %} class="landing-image">
+            <img src={% static 'images/card.jpg' %} class="landing-image">
             <div>
                 <h1 id="type-first" class="typewriter">Your personal (disc) golf diary</h1><h1 id="type-second" class="typewriter">Never lose a score again!</h1>
             </div>
@@ -21,7 +21,7 @@
                 <h4 class="row-item-title-span">Play</h4>
             </div>
             <div class="row-item-media">
-                <img src={% static 'golf-club.svg' %}  class="media-image">
+                <img src={% static 'images/golf-club.svg' %}  class="media-image">
             </div>
             <div class="row-item-description">
                 <span>Pick from different games and variants! Pick between golf, disc golf and foot golf, choose 9-hole or 18-hole game, add notes to make game unforgettable!</span>
@@ -32,7 +32,7 @@
                 <h4 class="row-item-title-span">Track</h4>
             </div>
             <div class="row-item-media">
-                <img src={% static 'diary.svg' %} class="media-image">
+                <img src={% static 'images/diary.svg' %} class="media-image">
             </div>
             <div class="row-item-description">
                 <span>No matter if you play by yourself or with a bunch of friends who watch everything you do! Track par and score of up to ten players!</span>
@@ -43,7 +43,7 @@
                 <h4 class="row-item-title-span">Share</h4>
             </div>
             <div class="row-item-media">
-                <img src={% static 'message.svg' %} class="media-image">
+                <img src={% static 'images/message.svg' %} class="media-image">
             </div>
             <div class="row-item-description">
                 <span>Want to share the results after you're done playing? Nothing easier! Copy a link and text it to the group you played with! Let them see how they did!</span>
