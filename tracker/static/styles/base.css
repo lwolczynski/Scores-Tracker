@@ -274,13 +274,12 @@ footer {
 
 .modal-header, .modal-body {
     padding: 2px 16px;
+    justify-content: center;
 }
 
 .modal-title {
     margin-top: 10px;
     margin-bottom: 0;
-    width: 100%;
-    text-align: center;
 }
 
 /* Modal Content */

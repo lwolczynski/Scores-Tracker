@@ -22,7 +22,7 @@ function expandFunction(e) {
 }
 
 function openDeleteModal(e) {
-    const modal = document.getElementById("myModal");
+    const modal = document.querySelector("#modal");
     const modalCloseBtn = modal.querySelector('.close-modal');
     const modalDeleteBtn = modal.querySelector('#btn-confirm-delete');
     modal.style.display = "block";
