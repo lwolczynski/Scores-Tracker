@@ -349,6 +349,7 @@ def save_scores(request, game_id, timestamp):
                 setattr(score, key, value)
             score.save()
     game.notes = json_received['notes']
+    game.save()
     return JsonResponse({'status': 'ok', 'message': {'tag': 'success', 'text': 'Saved successfully.'}})
 
 #Add player view
