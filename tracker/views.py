@@ -66,6 +66,9 @@ def login_request(request):
     if request.user.is_authenticated:
         return redirect('index')
     if request.method == 'POST':
+        if request.user.is_authenticated:
+            messages.success(request, "You are already logged in!")
+            return redirect('index')
         form = AuthenticationForm(request=request, data=request.POST)
         if form.is_valid():
             username = form.cleaned_data.get('username')
