@@ -53,7 +53,7 @@ def register(request):
                 sg = SendGridAPIClient(os.environ.get('SENDGRID_API_KEY'))
                 response = sg.send(message)  # .status_code, .body, .headers
                 messages.warning(request, 'A verification email has been sent.')
-                return redirect('login')
+                return redirect('index')
             except Exception as e:
                 print(e)  # e.message
                 messages.warning(request, str(e))
@@ -66,9 +66,6 @@ def login_request(request):
     if request.user.is_authenticated:
         return redirect('index')
     if request.method == 'POST':
-        if request.user.is_authenticated:
-            messages.success(request, "You are already logged in!")
-            return redirect('index')
         form = AuthenticationForm(request=request, data=request.POST)
         if form.is_valid():
             username = form.cleaned_data.get('username')
