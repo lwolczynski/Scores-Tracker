@@ -84,7 +84,9 @@ nav a {
         display: none;
     }
     #burger {
-        display: inline;
+        display: block;
+        position: absolute;
+        right: 0;
     }
 }
 
