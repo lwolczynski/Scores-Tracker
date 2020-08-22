@@ -1,100 +1,108 @@
 #narrow-div {
-    margin-left: auto !important;
-    margin-right: auto !important;
-    max-width: 40rem;
-    padding: 10px;
-    box-shadow: 0 1px 2px rgba(0,0,0,0.05),0 1px 4px rgba(0,0,0,0.05),0 2px 8px rgba(0,0,0,0.05);
+  margin-left: auto !important;
+  margin-right: auto !important;
+  max-width: 40rem;
+  padding: 10px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05), 0 1px 4px rgba(0, 0, 0, 0.05),
+    0 2px 8px rgba(0, 0, 0, 0.05);
 }
 
 @media (max-width: 40rem) {
-    #narrow-div {
-        width: auto;
-    }
-    
-    .mobile-hidden {
-        display: none;
-    }
+  #narrow-div {
+    width: auto;
+  }
+
+  .mobile-hidden {
+    display: none;
+  }
 }
 
 @media screen and (max-width: 840px) {
-    #narrow-div {
-        padding-top: 0px;
-        box-shadow: none;
-    }
+  #narrow-div {
+    padding-top: 0px;
+    box-shadow: none;
+  }
 }
 
 ul {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
 }
 
 p {
-    margin-bottom: 0;
-    margin-block-start: 10px;
+  margin-bottom: 0;
+  margin-block-start: 10px;
 }
 
 .row-item-title-span {
-    margin: 0;
-    text-align: center;
+  margin: 0;
+  text-align: center;
 }
 
 button[type="submit"] {
-    padding: 10px;
-    width: 100%;
+  padding: 10px;
+  width: 100%;
 }
 
 #footer {
-    text-align: center;
+  text-align: center;
 }
 
-input, select {
-    font-size: inherit;
-    width: 100%;
-    -webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
-    -moz-box-sizing: border-box;    /* Firefox, other Gecko */
-    box-sizing: border-box;         /* Opera/IE 8+ */
+input,
+select {
+  font-size: inherit;
+  width: 100%;
+  -webkit-box-sizing: border-box;
+  /* Safari/Chrome, other WebKit */
+  -moz-box-sizing: border-box;
+  /* Firefox, other Gecko */
+  box-sizing: border-box;
+  /* Opera/IE 8+ */
 }
 
 .error {
-    color: #ff6f69;
+  color: #ff6f69;
 }
 
 .flex-date {
-    flex: 4 0;
+  flex: 4 0;
 }
 
 .flex-sport {
-    flex: 3 0;
+  flex: 3 0;
 }
+
 @media (max-width: 40rem) {
-    .flex-sport {
-        flex: 2 0;
-    }
+  .flex-sport {
+    flex: 2 0;
+  }
 }
 
 .flex-players {
-    flex: 1.5 0;
+  flex: 1.5 0;
 }
+
 @media (max-width: 40rem) {
-    .flex-players {
-        flex: 1 0;
-    }
+  .flex-players {
+    flex: 1 0;
+  }
 }
 
 @keyframes blinkingText {
-    0% {
-        color: red;
-    }
-    50% {
-        color: inherit;
-    }
-    100% {
-        color: red;
-    }
+  0% {
+    color: red;
+  }
+
+  50% {
+    color: inherit;
+  }
+
+  100% {
+    color: red;
+  }
 }
 
 .delete-warning {
-    animation: blinkingText 3s infinite;
+  animation: blinkingText 3s infinite;
 }
-

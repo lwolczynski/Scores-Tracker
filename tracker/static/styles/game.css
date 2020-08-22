@@ -1,147 +1,152 @@
 .rtable-wide {
-    display: flex;
-    vertical-align: top;
-    overflow-x: auto;
-    white-space: nowrap;
-    border-collapse: collapse;
-    border-spacing: 0;
-    overflow: hidden;
+  display: flex;
+  vertical-align: top;
+  overflow-x: auto;
+  white-space: nowrap;
+  border-collapse: collapse;
+  border-spacing: 0;
+  overflow: hidden;
 }
 
 .rtable-wide thead {
-    display: flex;
-    flex-shrink: 0;
-    width: 12%;
-    min-width: min-content;
+  display: flex;
+  flex-shrink: 0;
+  width: 12%;
+  min-width: min-content;
 }
-  
+
 .rtable-wide tbody {
-    width: 100%;
-    display: flex;
-    position: relative;
-    overflow-x: auto;
-    overflow-y: hidden;
-    -webkit-overflow-scrolling: touch;
+  width: 100%;
+  display: flex;
+  position: relative;
+  overflow-x: auto;
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;
 }
 
 .rtable-wide tr {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    min-width: min-content;
-    flex-shrink: 0;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-width: min-content;
+  flex-shrink: 0;
 }
-  
+
 .rtable-wide th {
-    display: flex;
-    background: #f2f0e6;
-    text-align: left;
+  display: flex;
+  background: #f2f0e6;
+  text-align: left;
 }
 
 .rtable-wide th input {
-    min-width: 80px;
-    max-width: 164px;
+  min-width: 80px;
+  max-width: 164px;
 }
 
 .rtable-wide th,
 .rtable-wide td {
-    padding: 6px 12px;
-    border: 1px solid #d9d7ce;
-    border-radius: 10px;
+  padding: 6px 12px;
+  border: 1px solid #d9d7ce;
+  border-radius: 10px;
 }
 
 .rtable-wide td {
-    border-left: 0;
-    text-align: center;
+  border-left: 0;
+  text-align: center;
 }
 
 .rtable-wide td:first-child {
-    background: #f2f0e6;
+  background: #f2f0e6;
 }
-  
+
 .rtable-wide th:not(:last-child),
 .rtable-wide td:not(:last-child) {
-    border-bottom: 0;
+  border-bottom: 0;
 }
 
 .rtable-long {
-    display: inline-block;
-    overflow-x: auto;
-    overflow-y: hidden;
-    border-spacing: 0;
-    width: 100%;
-
+  display: inline-block;
+  overflow-x: auto;
+  overflow-y: hidden;
+  border-spacing: 0;
+  width: 100%;
 }
 
 .rtable-long th {
-    background: #f2f0e6;
-    min-width: 50px;
+  background: #f2f0e6;
+  min-width: 50px;
 }
 
 .rtable-long th,
 .rtable-long td {
-    width: 840px;
-    padding: 6px 12px;
-    border: 1px solid #d9d7ce;
-    border-radius: 10px;
-    white-space: nowrap;
+  width: 840px;
+  padding: 6px 12px;
+  border: 1px solid #d9d7ce;
+  border-radius: 10px;
+  white-space: nowrap;
 }
 
 .rtable-long td {
-    border-top: 0;
-    text-align: center;
+  border-top: 0;
+  text-align: center;
 }
 
 .rtable-long td:first-child {
-    background: #f2f0e6;
+  background: #f2f0e6;
 }
 
 .rtable-long th:not(:first-child),
 .rtable-long td:not(:first-child) {
-    border-left: 0;
+  border-left: 0;
 }
 
 textarea {
-    width: 100%;
-    font-size: inherit;
-    font-family: inherit;
-    resize: none;
-    border: 1px solid #d9d7ce;
-    border-radius: 10px;
-    -webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
-    -moz-box-sizing: border-box;    /* Firefox, other Gecko */
-    box-sizing: border-box;         /* Opera/IE 8+ */
+  width: 100%;
+  font-size: inherit;
+  font-family: inherit;
+  resize: none;
+  border: 1px solid #d9d7ce;
+  border-radius: 10px;
+  -webkit-box-sizing: border-box;
+  /* Safari/Chrome, other WebKit */
+  -moz-box-sizing: border-box;
+  /* Firefox, other Gecko */
+  box-sizing: border-box;
+  /* Opera/IE 8+ */
 }
 
 input {
-    text-align: inherit;
-    padding: 0;
-    width: 100%;
-    font-size: inherit;
-    font-family: inherit;
-    font-weight: inherit;
-    background-color: inherit;
-    border: 0;
-    -webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
-    -moz-box-sizing: border-box;    /* Firefox, other Gecko */
-    box-sizing: border-box;         /* Opera/IE 8+ */
+  text-align: inherit;
+  padding: 0;
+  width: 100%;
+  font-size: inherit;
+  font-family: inherit;
+  font-weight: inherit;
+  background-color: inherit;
+  border: 0;
+  -webkit-box-sizing: border-box;
+  /* Safari/Chrome, other WebKit */
+  -moz-box-sizing: border-box;
+  /* Firefox, other Gecko */
+  box-sizing: border-box;
+  /* Opera/IE 8+ */
 }
 
-input[type=number]::-webkit-inner-spin-button, 
-input[type=number]::-webkit-outer-spin-button { 
-  -webkit-appearance: none; 
-  margin: 0; 
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
 }
 
 .rtable-long th input {
-    width: 80%;
+  width: 80%;
 }
 
 .delete {
-    border: none;
-    background-color: transparent;
-    font-weight: 700;
-    opacity: 0.5;
-    cursor: pointer;
-    color: inherit;
+  border: none;
+  background-color: transparent;
+  font-weight: 700;
+  opacity: 0.5;
+  cursor: pointer;
+  color: inherit;
 }

@@ -1,23 +1,24 @@
 {% extends 'layout.html' %}
 {% load static %}
 
-{% block head %}<link rel="stylesheet" href={% static 'styles/narrow_page.css' %}>{% endblock %}
+{% block head %}
+<link rel="stylesheet" href={% static 'styles/narrow_page.css' %}>{% endblock %}
 
 {% block title %}New game{% endblock %}
 
 {% block content %}
-    <div id="content" class="main">
-        <div id="narrow-div">
-            <h4 class="row-item-title-span">New game</h4>
-            <form method="POST">
-                {% csrf_token %}
-                {{ form.as_p }}
-                <p id="footer">
-                    <button type="submit">Start</button>
-                </p>
-            </form>
-        </div>
+<div id="content" class="main">
+    <div id="narrow-div">
+        <h4 class="row-item-title-span">New game</h4>
+        <form method="POST">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <p id="footer">
+                <button type="submit">Start</button>
+            </p>
+        </form>
     </div>
+</div>
 {% endblock %}
 
 {% block scripts %}

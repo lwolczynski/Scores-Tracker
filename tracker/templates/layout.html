@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 {% load static %}
 <html>
-    <head>
+
+<head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="icon" type="image/png" href="{% static 'images/favico.png' %}" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -9,59 +10,61 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans">
     <link rel="stylesheet" href={% static 'styles/base.css' %}>
     {% block head %}{% endblock %}
-	<title>{% block title %}{% endblock %}</title>
-    </head>
-    <body>
-        <div id="sticky-top">
-            <div id="topbar" class="container">
-                <nav class="main">
-                    <div id="logo"><a href="{% url 'index' %}">MyScore</a></div>
-                    {% if user.is_authenticated %}
-                    <div class="nav-item hidden-on-mobile push"><a href="{% url 'new_game' %}">New game</a></div>
-                    <div class="nav-item hidden-on-mobile"><a href="{% url 'history' %}">History</a></div>
-                    <div class="nav-item hidden-on-mobile"><a href="{% url 'my_account' %}">My account</a></div>
-                    <div class="nav-item hidden-on-mobile"><a href="{% url 'logout' %}">Logout</a></div>
-                    {% else %}
-                    <div class="nav-item hidden-on-mobile push"><a href="{% url 'login' %}">Login</a></div>
-                    <div class="nav-item hidden-on-mobile"><a href="{% url 'register' %}">Register</a></div>
-                    {% endif %}
-                </nav>
-                <div id="burger" class="container"><button><i class="fa fa-bars"></i></button></div>
-            </div>
-            <div id="messages">
+    <title>{% block title %}{% endblock %}</title>
+</head>
+
+<body>
+    <div id="sticky-top">
+        <div id="topbar" class="container">
+            <nav class="main">
+                <div id="logo"><a href="{% url 'index' %}">MyScore</a></div>
+                {% if user.is_authenticated %}
+                <div class="nav-item hidden-on-mobile push"><a href="{% url 'new_game' %}">New game</a></div>
+                <div class="nav-item hidden-on-mobile"><a href="{% url 'history' %}">History</a></div>
+                <div class="nav-item hidden-on-mobile"><a href="{% url 'my_account' %}">My account</a></div>
+                <div class="nav-item hidden-on-mobile"><a href="{% url 'logout' %}">Logout</a></div>
+                {% else %}
+                <div class="nav-item hidden-on-mobile push"><a href="{% url 'login' %}">Login</a></div>
+                <div class="nav-item hidden-on-mobile"><a href="{% url 'register' %}">Register</a></div>
+                {% endif %}
+            </nav>
+            <div id="burger" class="container"><button><i class="fa fa-bars"></i></button></div>
+        </div>
+        <div id="messages">
             {% if messages %}
-                {% for message in messages %}
-                <div class="alert alert-{{ message.tags }}">
-                    <div class="main message">
-                        <div>
-                            {{ message }}
-                        </div>
-                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                            <span aria-hidden="true">×</span>
-                        </button>
+            {% for message in messages %}
+            <div class="alert alert-{{ message.tags }}">
+                <div class="main message">
+                    <div>
+                        {{ message }}
                     </div>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
                 </div>
-                {% endfor %}
-            {% endif %}
             </div>
-        </div>    
-        {% block content %}{% endblock %}
-        <footer>
-            <small class="span-footer">
-                © 2020 created by <a href="https://github.com/lwolczynski">lwolczynski</a> <span id="show-credits" class="clickable">(show credits)</span>
-            </small>
-            <small class="span-footer hidden zero-opacity">
-                Icons made by <a href="https://www.flaticon.com/authors/prettycons">prettycons</a> from <a href="https://www.flaticon.com/">www.flaticon.com</a>
-            </small>
-            <small class="span-footer hidden zero-opacity">
-                Favico made by <a href="https://www.flaticon.com/authors/freepik">Freepik</a> from <a href="https://www.flaticon.com/">www.flaticon.com</a>
-            </small>
-            <small class="span-footer hidden zero-opacity">
-                Golf scorecard made by <a href="https://www.flickr.com/photos/golf_pictures/">Dan Perry</a> from <a href="https://www.flickr.com/">www.flickr.com</a>
-            </small>
-        </footer>
-        <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-        <script src="{% static 'js/main.js' %}"></script>
-        {% block scripts %}{% endblock %}
-    </body>
+            {% endfor %}
+            {% endif %}
+        </div>
+    </div>
+    {% block content %}{% endblock %}
+    <footer>
+        <small class="span-footer">
+            © 2020 created by <a href="https://github.com/lwolczynski">lwolczynski</a> <span id="show-credits" class="clickable">(show credits)</span>
+        </small>
+        <small class="span-footer hidden zero-opacity">
+            Icons made by <a href="https://www.flaticon.com/authors/prettycons">prettycons</a> from <a href="https://www.flaticon.com/">www.flaticon.com</a>
+        </small>
+        <small class="span-footer hidden zero-opacity">
+            Favico made by <a href="https://www.flaticon.com/authors/freepik">Freepik</a> from <a href="https://www.flaticon.com/">www.flaticon.com</a>
+        </small>
+        <small class="span-footer hidden zero-opacity">
+            Golf scorecard made by <a href="https://www.flickr.com/photos/golf_pictures/">Dan Perry</a> from <a href="https://www.flickr.com/">www.flickr.com</a>
+        </small>
+    </footer>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="{% static 'js/main.js' %}"></script>
+    {% block scripts %}{% endblock %}
+</body>
+
 </html>

@@ -1,6 +1,6 @@
 function modifyFormView() {
     formPs = document.querySelector("form").querySelectorAll("p");
-    formPs.forEach(p => {
+    formPs.forEach((p) => {
         const select = p.querySelector("select");
         if (select) {
             const br = document.createElement("br");
@@ -11,7 +11,7 @@ function modifyFormView() {
 
 function lookForErrorMsgs() {
     errUl = document.querySelectorAll("ul.errorlist");
-    errUl.forEach(ul => {
+    errUl.forEach((ul) => {
         const msg = ul.firstChild.innerHTML;
         const nextP = ul.nextElementSibling;
         const br = document.createElement("br");

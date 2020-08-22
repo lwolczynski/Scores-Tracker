@@ -1,7 +1,8 @@
 {% extends 'layout.html' %}
 {% load static %}
 
-{% block head %}<link rel="stylesheet" href={% static 'styles/game.css' %}>{% endblock %}
+{% block head %}
+<link rel="stylesheet" href={% static 'styles/game.css' %}>{% endblock %}
 
 {% block title %}Game{% endblock %}
 
@@ -54,8 +55,8 @@
 
 {% block scripts %}
 <script>
-    const holesNumber = {{ game.holes }};
-    const editable = {{ edit|lower }};
+    const holesNumber = {{game.holes}};
+    const editable = {{edit|lower}};
 </script>
 <script src="{% static 'js/game.js' %}"></script>
 {% endblock %}

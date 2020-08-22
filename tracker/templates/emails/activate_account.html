@@ -1,13 +1,16 @@
 <!DOCTYPE html>
 {% load static %}
 <html>
-    <head>
+
+<head>
     <link rel="stylesheet" href={% static 'styles/base.css' %}>
-    </head>
-    <body>
-        <h4>Welcome to MyScore!</h4>
-        <p>Thank you for joining us <span style="text-decoration-line: underline;">{{ user }}</span>!</p>
-        <p>Your activation link is: <a href="{{ protocol }}://{{ domain }}/activate/{{ uid }}/{{ token }}">{{ protocol }}://{{ domain }}/activate/{{ uid }}/{{ token }}</a></p>
-        <p><small class="span-footer">© 2020 <a href="{{ protocol }}://{{ domain }}">MyScore</a> created by <a href="https://github.com/lwolczynski">lwolczynski</a></small></p>
-    </body>
+</head>
+
+<body>
+    <h4>Welcome to MyScore!</h4>
+    <p>Thank you for joining us <span style="text-decoration-line: underline;">{{ user }}</span>!</p>
+    <p>Your activation link is: <a href="{{ protocol }}://{{ domain }}/activate/{{ uid }}/{{ token }}">{{ protocol }}://{{ domain }}/activate/{{ uid }}/{{ token }}</a></p>
+    <p><small class="span-footer">© 2020 <a href="{{ protocol }}://{{ domain }}">MyScore</a> created by <a href="https://github.com/lwolczynski">lwolczynski</a></small></p>
+</body>
+
 </html>

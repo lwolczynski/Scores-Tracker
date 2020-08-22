@@ -1,112 +1,130 @@
 .row {
-    display: grid;
-    grid-gap: 24px;
-    margin: 0 auto;
+  display: grid;
+  grid-gap: 24px;
+  margin: 0 auto;
 }
 
 .row {
-    grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(3, 1fr);
 }
 
 @media screen and (max-width: 840px) {
-    .row {
-        grid-template-columns: repeat(2, 1fr);
-    }
-    #landing-top {
-        display: none;
-    }
+  .row {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  #landing-top {
+    display: none;
+  }
 }
 
 @media screen and (max-width: 600px) {
-    .row {
-        grid-template-columns: 1fr;
-    }
+  .row {
+    grid-template-columns: 1fr;
+  }
 }
 
 .row-item {
-    display: flex;
-    flex: 1 0;
-    flex-direction: column;
-    text-align: center;
+  display: flex;
+  flex: 1 0;
+  flex-direction: column;
+  text-align: center;
 }
 
 .row-item-title-span {
-    margin: 0;
+  margin: 0;
 }
 
 .row-item-media {
-    min-width: 0;
-    width: 100%;
-    flex: 0 0 auto;
-    margin: 10px;
+  min-width: 0;
+  width: 100%;
+  flex: 0 0 auto;
+  margin: 10px;
 }
 
 .media-image {
-    max-width: 200px;
+  max-width: 200px;
 }
 
 .row-item-custom-image {
-    display: block;
-    margin-block-start: 1em;
-    margin-block-end: 1em;
-    margin-inline-start: 40px;
-    margin-inline-end: 40px;
-    background-color: #43cde6;
-    padding: 0 0 56.25%;
-    position: relative;
+  display: block;
+  margin-block-start: 1em;
+  margin-block-end: 1em;
+  margin-inline-start: 40px;
+  margin-inline-end: 40px;
+  background-color: #43cde6;
+  padding: 0 0 56.25%;
+  position: relative;
 }
 
 .landing-image {
-    max-width: 100%;
-    height: auto;
-    opacity: 0.7;
+  max-width: 100%;
+  height: auto;
+  opacity: 0.7;
 }
 
 #image-div {
-    max-height: 420px;
-    overflow: hidden;
-    display: flex;
-    position: relative;
-    justify-content: center;
-    flex-direction: column;
+  max-height: 420px;
+  overflow: hidden;
+  display: flex;
+  position: relative;
+  justify-content: center;
+  flex-direction: column;
 }
 
 .typewriter {
-    z-index: 10;
-    position: absolute;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    overflow: hidden; /* Ensures the content is not revealed until the animation */
-    white-space: nowrap; /* Keeps the content on a single line */
-    text-align: center;
-    margin: 0 auto; /* Gives that scrolling effect as the typing happens */
-    font-family: Courier;
-    font-size: 2em;
-    color: black;
-    -webkit-text-fill-color: white; /* Will override color (regardless of order) */
-    -webkit-text-stroke-width: 1px;
-    -webkit-text-stroke-color: black;
+  z-index: 10;
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  overflow: hidden;
+  /* Ensures the content is not revealed until the animation */
+  white-space: nowrap;
+  /* Keeps the content on a single line */
+  text-align: center;
+  margin: 0 auto;
+  /* Gives that scrolling effect as the typing happens */
+  font-family: Courier;
+  font-size: 2em;
+  color: black;
+  -webkit-text-fill-color: white;
+  /* Will override color (regardless of order) */
+  -webkit-text-stroke-width: 1px;
+  -webkit-text-stroke-color: black;
 }
 
 #type-first {
-    top: 35%;
-    animation: 
-        typing-first 3s steps(31, end)
+  top: 35%;
+  animation:
+    typing-first 3s steps(31, end)
 }
 
 #type-second {
-    top: 71%;
-    animation: 
-        typing-second 6s steps(25, end)
+  top: 71%;
+  animation:
+    typing-second 6s steps(25, end)
 }
 
 @keyframes typing-first {
-    0% { width: 0 }
-    100% { width: 597px }
+  0% {
+    width: 0
+  }
+
+  100% {
+    width: 597px
+  }
 }
 
 @keyframes typing-second {
-    0% { width: 0 }
-    50% { width: 0 }
-    100% { width: 482px }
+  0% {
+    width: 0
+  }
+
+  50% {
+    width: 0
+  }
+
+  100% {
+    width: 482px
+  }
 }
