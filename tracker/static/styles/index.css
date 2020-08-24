@@ -96,7 +96,7 @@
 #type-first {
   top: 35%;
   animation:
-    typing-first 3s steps(31, end)
+    typing-first 3s steps(24, end)
 }
 
 #type-second {
@@ -111,7 +111,7 @@
   }
 
   100% {
-    width: 597px
+    width: 462px
   }
 }
 
@@ -125,6 +125,6 @@
   }
 
   100% {
-    width: 482px
+    width: 483px
   }
 }

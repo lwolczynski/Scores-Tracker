@@ -4,12 +4,12 @@
 {% block head %}
 <link rel="stylesheet" href={% static 'styles/narrow_page.css' %}>{% endblock %}
 
-{% block title %}Register{% endblock %}
+{% block title %}Register | {% endblock %}
 
 {% block content %}
 <div id="content" class="main">
     <div id="narrow-div">
-        <h4 class="row-item-title-span">Registration</h4>
+        <h4 class="row-item-title-span">Register</h4>
         <form method="POST">
             {% csrf_token %}
             {% for field in form %}
