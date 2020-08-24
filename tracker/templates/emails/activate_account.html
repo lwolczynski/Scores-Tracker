@@ -1,12 +1,16 @@
 <!DOCTYPE html>
 <html>
 
-<body>
+<body style="font-family: Verdana;">
+    <img src="https://myscore.golf/static/images/logo.png" alt="" style="width: 300px; height: auto;" />
     <h4>Welcome to MyScore!</h4>
-    <p>Thank you for joining us <span style="text-decoration-line: underline;">{{ user }}</span>!</p>
-    <p>Your activation link is: <a href="{{ protocol }}://{{ domain }}/activate/{{ uid }}/{{ token }}">{{ protocol }}://{{ domain }}/activate/{{ uid }}/{{ token }}</a></p>
-    <p><small class="span-footer">© 2020 <a href="{{ protocol }}://{{ domain }}">MyScore</a> created by <a href="https://github.com/lwolczynski">lwolczynski</a></small></p>
-    <img src="http://site.com/path/to/image.jpg" />
+    <p>It is great to have you onboard <span style="text-decoration-line: underline;">{{ user }}</span>!</p>
+    <p>With MyScore you can track your scores for different games and variants! Pick between golf, disc golf and foot golf, choose 9-hole or 18-hole game, add notes, share results with friends!</p>
+    <p>Here is your personal link to activate your MyScore account:<br />
+        <a href="{{ protocol }}://{{ domain }}/activate/{{ uid }}/{{ token }}">{{ protocol }}://{{ domain }}/activate/{{ uid }}/{{ token }}</a>
+    </p>
+    <p>We hope you have a lot of fun at MyScore!</p>
+    <p><small>© 2020 <a href="{{ protocol }}://{{ domain }}">MyScore</a> created by <a href="https://github.com/lwolczynski">lwolczynski</a></small></p>
 </body>
 
 </html>
