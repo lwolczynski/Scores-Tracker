@@ -73,6 +73,9 @@ nav a {
   background-color: transparent;
   cursor: pointer;
   color: inherit;
+  /* fix for iPhones (Chorme user agent spreadsheet default padding for button 1em) */
+  padding-right: inherit;
+  padding-left: inherit;
 }
 
 @media screen and (max-width: 840px) {
