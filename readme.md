@@ -1,8 +1,7 @@
 # Scores Tracker
-**[myscore.golf](https://myscore.golf/)**
 
-This is a web app that allows users to track their golf scores.\
-***Play golf, disc golf or foot golf and create your personal scorecard to compete with friends! Easy to use, easy to share.***
+***Play golf, disc golf or foot golf and create your personal scorecard to compete with friends! Easy to use, easy to share.***\
+This is a web app that allows users to track their golf scores. Visit **[myscore.golf](https://myscore.golf/)**
 
 ## Technologies and tools used
 - HTML + jS
