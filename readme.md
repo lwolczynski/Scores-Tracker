@@ -15,4 +15,4 @@ List of variables set:
 - For SendGrid API: SENDGRID_API_KEY, SENDGRID_PASSWORD, SENDGRID_USERNAME
 
 ## Check it out
-This project has been deployed online You can see in deployed [here](https://myscore.golf/).
+This project has been deployed online. You can see in deployed [here](https://myscore.golf/).
